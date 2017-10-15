@@ -12,6 +12,5 @@ fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
 export function create(req, res) {
 	res.status(200);
 	res.header("Content-Type","application/json");
-	res.send();
-	console.log(content);
+	res.send("OK");
 }
