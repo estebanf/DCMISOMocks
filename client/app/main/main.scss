@@ -33,3 +33,7 @@
 #value {
   font-weight: bold;
 }
+.pre-scrollable {
+    max-height: 500px;
+    overflow-y: scroll;
+}

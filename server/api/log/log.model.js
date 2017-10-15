@@ -9,8 +9,17 @@ var LogSchema = new mongoose.Schema({
   case_id: String,
   step_id: String,
   log_type: String,
-  description: String
+  description: String,
+  created_at: Date,
+  updated_at: Date
 });
-
+LogSchema.pre('save',function(next){
+	var now = new Date();
+	this.updated_at = now;
+	if(!this.created_at){
+		this.crated_at= now;
+	}
+	next();
+});
 registerEvents(LogSchema);
 export default mongoose.model('Log', LogSchema);

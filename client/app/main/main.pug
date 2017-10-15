@@ -3,20 +3,21 @@
     .col-lg-8
     .col-lg-4
       h1.page-header Logs:
-      p.logs(ng-repeat='log in $ctrl.logs')
-        | pid: 
-        span#value
-          | {{log.process_instance_id}}
-        |, batch_id:
-        span#value
-          | {{log.batch_id}}
-        |, case_id:
-        span#value
-          | {{log.case_id}}
-        |, step_id:
-        span#value
-          | {{log.step_id}}
-        |, description:
-        span#value
-          | {{log.description}}
+      pre.pre-scrollable
+        p.logs(ng-repeat='log in $ctrl.logs | orderBy: "created_at" : true')
+          | pid: 
+          span#value
+            | {{log.process_instance_id}}
+          |, batch_id:
+          span#value
+            | {{log.batch_id}}
+          |, case_id:
+          span#value
+            | {{log.case_id}}
+          |, step_id:
+          span#value
+            | {{log.step_id}}
+          |, description:
+          span#value
+            | {{log.description}}
 
