@@ -1,6 +1,16 @@
 .container-fluid
   .row
     .col-lg-8
+      h1.page-header Batchs
+      .panel.panel-default(ng-repeat='batch in $ctrl.batchs')
+        .panel-heading
+          .h4
+            | BatchID: {{batch.batchid}}, Client: {{batch.clientid}}, EnvId: {{ batch.environmentid}}
+        .panel-body
+          | something
+      ul
+        li.logs(ng-repeat='batch in $ctrl.batchs')
+          | {{batch.batchid}}
     .col-lg-4
       h1.page-header Logs:
       pre.pre-scrollable

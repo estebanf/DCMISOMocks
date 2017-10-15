@@ -10,7 +10,8 @@ import path from 'path';
 export default function(app) {
   // Insert routes below
   app.use('/api/logs', require('./api/log'));
-  app.use('/api/things', require('./api/thing'));
+  app.use('/api/batchtracking',require('./api/batchtracking'))
+  app.use('/api/generateFile',require('./api/generateFile'))
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

@@ -3,7 +3,8 @@ import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 
 export class MainController {
-  logs = []
+  logs = [];
+  batchs = [];
   /*@ngInject*/
   constructor($http, $scope, socket) {
     this.$http = $http;
@@ -20,6 +21,11 @@ export class MainController {
         this.logs = response.data;
         this.socket.syncUpdates('log', this.logs);
       });
+    this.$http.get('/api/batchtracking')
+      .then(response => {
+        this.batchs = response.data;
+        this.socket.syncUpdates('batchtracking',this.batchs);
+      })
   }
 }
 

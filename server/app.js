@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
-import seedDatabaseIfNeeded from './config/seed';
+// import seedDatabaseIfNeeded from './config/seed';
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -36,7 +36,7 @@ function startServer() {
   });
 }
 
-seedDatabaseIfNeeded();
+// seedDatabaseIfNeeded();
 setImmediate(startServer);
 
 // Expose app

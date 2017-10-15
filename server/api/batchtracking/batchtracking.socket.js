@@ -1,25 +1,17 @@
-/**
- * Broadcast updates to client when the model changes
- */
+'use strint'
+import LogEvents from './batchtracking.controller'
 
-'use strict';
-
-import ThingEvents from './thing.events';
-
-// Model events to emit
 var events = ['save', 'remove'];
-
 export function register(socket) {
   // Bind model events to socket events
   for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
-    var listener = createListener(`thing:${event}`, socket);
+    var listener = createListener(`batchtracking:${event}`, socket);
 
-    ThingEvents.on(event, listener);
+    LogEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 }
-
 
 function createListener(event, socket) {
   return function(doc) {
@@ -29,6 +21,6 @@ function createListener(event, socket) {
 
 function removeListener(event, listener) {
   return function() {
-    ThingEvents.removeListener(event, listener);
+    LogEvents.removeListener(event, listener);
   };
 }

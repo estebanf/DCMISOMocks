@@ -1,0 +1,95 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:laun="http://www.example.org/Launchpoint">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <laun:DCMISORequestFile>
+         <laun:caseId>00000</laun:caseId>
+         <laun:content>
+            <Request>
+              <ClientID>48</ClientID>
+              <Environment>MC1-U-U</Environment>
+              <Xml>
+              <Cases>
+                <Case>
+                  <CaseID>00000</CaseID>
+                  <ReplacementInd>0</ReplacementInd>
+                  <Claim>
+                    <ClaimsOccurrence id="ClaimsOccurrence1">
+                      <ItemIdInfo>
+                        <InsurerId>123456</InsurerId>
+                      </ItemIdInfo>
+                      <ClaimsReported ReportedToRef="InsurerID"> 
+                        <ReportedDt />
+                      </ClaimsReported>
+                      <LossDt>2015-06-09</LossDt>
+                      <LossTime>00:00</LossTime>
+                      <IncidentDesc>Unknown</IncidentDesc>
+                      <Addr>
+                        <Addr1>6789 2ND AVE</Addr1>
+                        <Addr2>APT X</Addr2>
+                        <City>NEW YORK</City>
+                        <StateProvCd>NY</StateProvCd>
+                        <PostalCode>10032</PostalCode>
+                        <CountryCd>US</CountryCd>
+                      </Addr>
+                    </ClaimsOccurrence>
+                    <ClaimsParty id="ClaimsParty-01">
+                      <GeneralPartyInfo>
+                        <NameInfo>
+                          <PersonName>
+                            <Surname>DOE</Surname>
+                            <GivenName>JOHN</GivenName>
+                            <OtherGivenName />
+                          </PersonName>
+                          <TaxIdentity>
+                            <TaxIdTypeCd>SSN</TaxIdTypeCd>
+                            <TaxId>123456789</TaxId>
+                          </TaxIdentity>
+                        </NameInfo>
+                        <Addr>
+                          <Addr1>6789 2ND AVE</Addr1>
+                          <Addr2>APT X</Addr2>
+                          <City>NEW YORK</City>
+                          <StateProvCd>NY</StateProvCd>
+                          <PostalCode>10032</PostalCode>
+                          <CountryCd>US</CountryCd>
+                        </Addr>
+                        <Communications>
+                          <PhoneInfo>
+                            <PhoneTypeCd>Phone</PhoneTypeCd>
+                            <CommunicationUseCd>Home</CommunicationUseCd>
+                            <PhoneNumber>+1-234-1234567</PhoneNumber>
+                          </PhoneInfo>
+                        </Communications>
+                      </GeneralPartyInfo>
+                      <PersonInfo>
+                        <GenderCd>M</GenderCd>
+                        <BirthDt>1999-01-01</BirthDt>
+                      </PersonInfo>
+                      <ClaimsPartyInfo>
+                        <ClaimsPartyRoleCd codelistref="ClaimsPartyRoleCdList">IN</ClaimsPartyRoleCd>
+                      </ClaimsPartyInfo>
+                      <ClaimsInjuredInfo id="ClaimsInjury-01">
+                        <ClaimsInjury>
+                          <InjuryNatureDesc>InjuryNatureDesc</InjuryNatureDesc>
+                          <LossCauseDesc>LossCauseDesc</LossCauseDesc>
+                          <ImpairmentPct>30</ImpairmentPct>
+                        </ClaimsInjury>
+                      </ClaimsInjuredInfo>
+                    </ClaimsParty>
+                    <AdjusterParty>
+                      <AdjusterPartyInfo AssignmentRef="ClaimsInjury-01">
+                        <CoverageCd codelistref="CoverageCdList">DISB</CoverageCd>
+                        <LossCauseCd codelistref="LossTypeCdList">DISB</LossCauseCd>
+                      </AdjusterPartyInfo>
+                    </AdjusterParty>
+                  </Claim>
+                </Case>
+                </Cases>
+              </Xml>
+                <IsTest>true</IsTest>
+                <RequestID>1436</RequestID>
+              </Request>
+         </laun:content>
+      </laun:DCMISORequestFile>
+   </soapenv:Body>
+</soapenv:Envelope>
