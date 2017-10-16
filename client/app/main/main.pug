@@ -4,7 +4,7 @@
       h1.page-header Batchs
         button.btn.btn-primary.pull-right(ng-click='$ctrl.openModal()')
           i.fa.fa-file-o(aria-hidden="true")
-      .panel.panel-default(ng-repeat='batch in $ctrl.batchs')
+      .panel.panel-default(ng-repeat='batch in $ctrl.batchs | orderBy: "created_at" : true')
         .panel-heading
           .h4
             | BatchID: {{batch.batchid}}, Client: {{batch.clientid}}, EnvId: {{ batch.environmentid}}
@@ -12,29 +12,33 @@
           .row
             .col-sm-3
               h5
-                | batchid
-            .col-sm-3
-              h5
                 | caseid
-            .col-sm-3
+            .col-sm-2
               h5
-                | ISOIndicator
-            .col-sm-3
+                | score
+            .col-sm-2
               h5
                 | fundingSource
+            .col-sm-2
+              h5
+                | benefitamount
           .row(ng-repeat="iso in $ctrl.isos | filter: { batchid: batch.batchid }")
             .col-sm-3
-              span
-                | {{iso.batchid}}
-            .col-sm-3
-              span
+              .entry
                 | {{iso.caseid}}
-            .col-sm-3
-              span
-                | {{iso.isoindicator}}
-            .col-sm-3
-              span
+            .col-sm-2
+              .entry
+                | {{iso.score}}
+            .col-sm-2
+              .entry
                 | {{iso.fundingsource}}
+            .col-sm-2
+              .entry
+                | {{iso.benefitamount}}
+            .col-sm-1
+              i.fa.fa-eye(aria-hidden="true",ng-click='$ctrl.openModal()')
+            .col-sm-1
+              i.fa.fa-reply-all(aria-hidden="true",ng-click='$ctrl.openModal()')
 
     .col-lg-4
       h1.page-header Logs:

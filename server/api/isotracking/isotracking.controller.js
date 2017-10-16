@@ -21,20 +21,19 @@ function loadIsos(cb){
 loadIsos(function(data){
  	isos = data;
  });
-function logCase(l,o){
-	console.log("---" + l + "---")
-	console.log(JSON.stringify(_.map(o,function(obj){
-		return {
-			_id:obj._id,
-			batchid: obj.batchid,
-			caseid:obj.caseid
-		}
-	})))
-}
 function checkBatches(){
 	loadIsos(function(data){
 		var new_isos = data;
 
+		//UPdates
+		_.each(isos,function(obj){
+			var existingId = _.findIndex(new_isos,function(o) { return (o._id == obj._id) && !(_.isEqual(obj,o)) })
+			if(existingId >= 0){
+				obj = new_isos[existingId];
+				LogEvents.emit("save:" + obj._id,obj);
+				LogEvents.emit("save",obj);				
+			}
+		})
 		var del_elements = _.differenceWith(isos,new_isos,_.isEqual);
 		var new_elements = _.differenceWith(new_isos,isos,_.isEqual);
 
