@@ -20,6 +20,18 @@ import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 var MongoStore = connectMongo(session);
 
+function anyBodyParser(req, res, next) {
+    var data = '';
+    req.setEncoding('utf8');
+    req.on('data', function(chunk) { 
+        data += chunk;
+    });
+    req.on('end', function() {
+        req.rawBody = data;
+        next();
+    });
+}
+
 export default function(app) {
   var env = app.get('env');
 
@@ -40,6 +52,7 @@ export default function(app) {
   app.use(shrinkRay());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.use(anyBodyParser);
   app.use(methodOverride());
   app.use(cookieParser());
 
