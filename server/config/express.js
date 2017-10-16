@@ -20,16 +20,21 @@ import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 var MongoStore = connectMongo(session);
 
-function anyBodyParser(req, res, next) {
-    var data = '';
-    req.setEncoding('utf8');
-    req.on('data', function(chunk) { 
-        data += chunk;
-    });
-    req.on('end', function() {
-        req.rawBody = data;
-        next();
-    });
+function xmlBodyParser(req, res, next) {
+    if('application/xml' == req.headers['content-type']){    
+      var data = '';
+      req.setEncoding('utf8');
+      req.on('data', function(chunk) { 
+          data += chunk;
+      });
+      req.on('end', function() {
+          req.rawBody = data;
+          next();
+      });
+    }
+    else{
+      next();
+    }
 }
 
 export default function(app) {
@@ -52,7 +57,7 @@ export default function(app) {
   app.use(shrinkRay());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.use(anyBodyParser);
+  app.use(xmlBodyParser);
   app.use(methodOverride());
   app.use(cookieParser());
 

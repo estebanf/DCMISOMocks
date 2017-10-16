@@ -21,6 +21,7 @@ export class MainController {
       controller:'BatchController'
     });
     modalInstance.result.then(data => {
+      console.log(data);
       this.$http.post('/api/batch',data);
     },function(){
 

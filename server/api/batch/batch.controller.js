@@ -8,6 +8,9 @@ export function registerStompClient(stomp){
 }
 
 export function create(req, res) {
+	console.log("here");
+	console.log(req.body);
+	console.log(mqClient);
 	mqClient.send({
 		'destination': '/queue/test',
 		'body': JSON.stringify(req.body),
