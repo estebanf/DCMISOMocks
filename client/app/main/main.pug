@@ -2,6 +2,8 @@
   .row
     .col-lg-8
       h1.page-header Batchs
+        button.btn.btn-primary.pull-right(ng-click='$ctrl.openModal()')
+          i.fa.fa-file-o(aria-hidden="true")
       .panel.panel-default(ng-repeat='batch in $ctrl.batchs')
         .panel-heading
           .h4
@@ -30,4 +32,30 @@
           |, description:
           span#value
             | {{log.description}}
+script(type='text/ng-template',id='batchModalContent.html')
+  .modal-header
+    h3
+      | Create new batch
+  .modal-body
+    form.form-inline
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="ISOIndicator",ng-model="newCase.isoIndicator")
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="Score",ng-model="newCase.score")
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="FundingSource",ng-model="newCase.FundingSource")
+      button.btn.btn-primary.pull-right(ng-click="addCase()")
+        i.fa.fa-plus-square(aria-hidden="true") 
+        | &nbsp; Add        
+      button.btn.btn-warning.form-space.pull-right(ng-click="randomCase()")
+        i.fa.fa-random(aria-hidden="true")
+        | &nbsp; Random
+    pre.pre-scrollable(ng-bind-html="doc | prettify")
+  .modal-footer
+    button.btn.btn-primary(type="button",ng-click="ok()")
+      i.fa.fa-paper-plane-o(aria-hidden="true")
+      | &nbsp;Submit
+    button.btn.btn-danger(type="button",ng-click="cancel()")
+      i.fa.fa-undo(aria-hidden="true")
+      | &nbsp;Cancel
 
