@@ -1,4 +1,4 @@
-<ISOCaseRequestFile xmlns="http://www.example.org/Launchpoint">
+<ISOCaseRequestACKFile xmlns="http://www.example.org/Launchpoint">
   <Launchpoint:caseId xmlns:Launchpoint="http://www.example.org/Launchpoint">00000</Launchpoint:caseId>
   <Launchpoint:content xmlns:Launchpoint="http://www.example.org/Launchpoint">
 	<ACORD>
@@ -41,4 +41,4 @@
 	  </ClaimsSvcRs>
 	</ACORD>
   </Launchpoint:content>
-</ISOCaseRequestFile>
+</ISOCaseRequestACKFile>
