@@ -6,7 +6,6 @@ import request from 'request';
 
 var content = null;
 fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
-	console.log(err);
   content = data;
 });
 
@@ -21,10 +20,8 @@ function callBack(caseId){
 		body:body	
 	},function(err,res,data){
 		if(err){
-			console.log(err);
 		}
 		else{
-			console.log(data);
 		}
 	});
 }

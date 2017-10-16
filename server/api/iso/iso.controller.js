@@ -6,7 +6,6 @@ import uuid from 'uuid'
 
 var content = null;
 fs.readFile('server/api/iso/ISOACK.xml','utf8',function(err,data){
-	console.log(err);
   content = data;
 });
 
@@ -14,7 +13,7 @@ var xpath = require('xpath')
 var dom = require('xmldom').DOMParser
 
 export function create(req, res) {
-	console.log(req.headers['content-type']);
+	
 	var doc = new dom().parseFromString(req.rawBody);
 	var select = xpath.useNamespaces({"Launchpoint":"http://www.example.org/Launchpoint"})
 	var nodes = select("//Launchpoint:caseId",doc);

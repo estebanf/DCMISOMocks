@@ -11,9 +11,10 @@ export default function(app) {
   // Insert routes below
   app.use('/api/logs', require('./api/log'));
   app.use('/api/batchtracking',require('./api/batchtracking'))
+  app.use('/api/isotracking',require('./api/isotracking'))
   app.use('/api/generateFile',require('./api/generateFile'))
   app.use('/api/batch',require('./api/batch'))
-  app.use('/api/iso',require('./api/iso'))
+  app.use('/api/isotracking',require('./api/isotracking'))
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

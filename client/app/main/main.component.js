@@ -4,6 +4,7 @@ import routing from './main.routes';
 export class MainController {
   logs = [];
   batchs = [];
+  isos = [];
 
   /*@ngInject*/
   constructor($http, $scope, socket,$uibModal) {
@@ -12,6 +13,8 @@ export class MainController {
     this.modal = $uibModal;
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('log');
+      socket.unsyncUpdates('batchtracking');
+      socket.unsyncUpdates('isotracking');
     });
   }
   openModal() {
@@ -21,7 +24,6 @@ export class MainController {
       controller:'BatchController'
     });
     modalInstance.result.then(data => {
-      console.log(data);
       this.$http.post('/api/batch',data);
     },function(){
 
@@ -37,6 +39,11 @@ export class MainController {
       .then(response => {
         this.batchs = response.data;
         this.socket.syncUpdates('batchtracking',this.batchs);
+      })
+    this.$http.get('/api/isotracking')
+      .then(response => {
+        this.isos = response.data;
+        this.socket.syncUpdates('isotracking',this.isos)
       })
   }
 }

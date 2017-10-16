@@ -9,10 +9,33 @@
           .h4
             | BatchID: {{batch.batchid}}, Client: {{batch.clientid}}, EnvId: {{ batch.environmentid}}
         .panel-body
-          | something
-      ul
-        li.logs(ng-repeat='batch in $ctrl.batchs')
-          | {{batch.batchid}}
+          .row
+            .col-sm-3
+              h5
+                | batchid
+            .col-sm-3
+              h5
+                | caseid
+            .col-sm-3
+              h5
+                | ISOIndicator
+            .col-sm-3
+              h5
+                | fundingSource
+          .row(ng-repeat="iso in $ctrl.isos | filter: { batchid: batch.batchid }")
+            .col-sm-3
+              span
+                | {{iso.batchid}}
+            .col-sm-3
+              span
+                | {{iso.caseid}}
+            .col-sm-3
+              span
+                | {{iso.isoindicator}}
+            .col-sm-3
+              span
+                | {{iso.fundingsource}}
+
     .col-lg-4
       h1.page-header Logs:
       pre.pre-scrollable
