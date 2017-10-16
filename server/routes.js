@@ -11,7 +11,7 @@ export default function(app) {
   // Insert routes below
   app.use('/api/logs', require('./api/log'));
   app.use('/api/batchtracking',require('./api/batchtracking'))
-  app.use('/api/isotracking',require('./api/isotracking'))
+  app.use('/api/iso',require('./api/iso'))
   app.use('/api/generateFile',require('./api/generateFile'))
   app.use('/api/batch',require('./api/batch'))
   app.use('/api/isotracking',require('./api/isotracking'))
