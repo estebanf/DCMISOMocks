@@ -43,6 +43,12 @@ var all = {
         safe: true
       }
     }
+  },
+  stomp:{
+    host: process.env.ACTIVEMQ_HOST || 'bpms.everteam.us',
+    port: process.env.ACTIVEMQ_PORT || 61613,
+    user :process.env.ACTIVEMQ_USER || 'admin',
+    password: process.env.ACTIVEMQ_PASSWORD || 'admin'
   }
 };
 

@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
+import stomp from 'stomp';
 // import seedDatabaseIfNeeded from './config/seed';
 
 // Connect to MongoDB
@@ -28,7 +29,7 @@ var socketio = require('socket.io')(server, {
 require('./config/socketio').default(socketio);
 require('./config/express').default(app);
 require('./routes').default(app);
-
+require('./config/stomp').default(stomp,config.stomp)
 // Start server
 function startServer() {
   app.angularFullstack = server.listen(config.port, config.ip, function() {

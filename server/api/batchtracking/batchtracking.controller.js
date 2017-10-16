@@ -4,6 +4,7 @@ import jsonpatch from 'fast-json-patch';
 import request from 'request';
 import _ from 'lodash';
 import {EventEmitter} from 'events';
+
 var LogEvents = new EventEmitter();
 LogEvents.setMaxListeners(0);
 

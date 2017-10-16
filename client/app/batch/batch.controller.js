@@ -1,27 +1,9 @@
 'use strict';
 const angular = require('angular');
 
+
 /*@ngInject*/
 export function batchController($scope, $uibModalInstance,uuid) {
-  // console.log($uibModalInstance);
-//   <BatchId xmlns="http://www.example.org/Launchpoint">1234</BatchId>
-// <EnvironmentId xmlns="http://www.example.org/Launchpoint">8</EnvironmentId>
-// <ClientId xmlns="http://www.example.org/Launchpoint">9</ClientId>
-// <TotalCaseCount xmlns="http://www.example.org/Launchpoint">2</TotalCaseCount>
-// <Cases xmlns="http://www.example.org/Launchpoint">
-// <CaseId>12</CaseId>
-// <ISOIndicator>1</ISOIndicator>
-// <Score>67</Score>
-// <AccidentDate>2017-10-10T16:38:49-06:00</AccidentDate>
-// <BenefitAmount>5000</BenefitAmount>
-// <FundingSource>Medicaid</FundingSource>
-// <LOB>Health</LOB>
-// <State>CO</State>
-// <WorkComp>false</WorkComp>
-// <CaseStatus>Investigate</CaseStatus>
-// <CaseSource>Generated</CaseSource>
-// <SkipDuplicateCheck>false</SkipDuplicateCheck>
-// </Cases>
   $scope.batch = {
     BatchId: uuid.v4(),
     EnvironmentId: 1,

@@ -19,8 +19,9 @@ export class MainController {
       templateUrl: 'batchModalContent.html',
       size:'lg',
       controller:'BatchController'
-    }).result.then(function(data){
-      console.log(data);
+    });
+    modalInstance.result.then(data => {
+      this.$http.post('/api/batch',data);
     },function(){
 
     })
