@@ -21,20 +21,21 @@ import mongoose from 'mongoose';
 var MongoStore = connectMongo(session);
 
 function xmlBodyParser(req, res, next) {
-    if('application/xml' == req.headers['content-type']){    
-      var data = '';
-      req.setEncoding('utf8');
-      req.on('data', function(chunk) { 
-          data += chunk;
-      });
-      req.on('end', function() {
-          req.rawBody = data;
-          next();
-      });
-    }
-    else{
-      next();
-    }
+  var contype = req.headers['content-type'];
+  if (!contype || contype.indexOf('application/xml') !== 0){   
+    next();
+  }
+  else{
+    var data = '';
+    req.setEncoding('utf8');
+    req.on('data', function(chunk) { 
+        data += chunk;
+    });
+    req.on('end', function() {
+        req.rawBody = data;
+        next();
+    });
+  }
 }
 
 export default function(app) {
