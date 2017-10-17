@@ -6,6 +6,7 @@ const angular = require('angular');
 export function isoScoreController($scope, $uibModalInstance, isoresponse) {
   $scope.doc = JSON.stringify(isoresponse).replace(/\,/g,",\n");
   $scope.newScore = {
+    caseId: isoresponse.caseid,
     status: "",
     score: ""
   };
