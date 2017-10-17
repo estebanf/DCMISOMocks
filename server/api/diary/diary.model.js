@@ -13,7 +13,7 @@ var DiarySchema = new mongoose.Schema({
   diary_from: String,
   diary_to: String,
   description: String,
-  created_at: Date
+  create_date: Date
 });
 
 registerEvents(DiarySchema);
