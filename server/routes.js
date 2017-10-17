@@ -16,6 +16,7 @@ export default function(app) {
   app.use('/api/batch',require('./api/batch'))
   app.use('/api/isotracking',require('./api/isotracking'))
   app.use('/api/dcm',require('./api/dcm'))
+  app.use('/api/isoresponsetracking',require('./api/isoresponsetracking'))
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

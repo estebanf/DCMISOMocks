@@ -26,26 +26,58 @@
               h5
                 | status
           .row(ng-repeat="iso in $ctrl.isos | filter: { batchid: batch.batchid }")
-            .col-sm-2
-              .entry
-                | {{iso.caseid}}
-            .col-sm-2
-              .entry
-                | {{iso.score}}
-            .col-sm-2
-              .entry
-                | {{iso.fundingsource}}
-            .col-sm-2
-              .entry
-                | {{iso.benefitamount}}
-            .col-sm-2
-              .entry
-                | {{iso.casestate}} - {{iso.isostate}}
-            .col-sm-1
-              i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
-            .col-sm-1
-              i.fa.fa-reply-all.fa-lg(aria-hidden="true",ng-click='$ctrl.sendIsoResponse(iso)')
-
+            .col-sm-12
+              .row
+                .col-sm-2
+                  .entry
+                    | {{iso.caseid}}
+                .col-sm-2
+                  .entry
+                    | {{iso.score}}
+                .col-sm-2
+                  .entry
+                    | {{iso.fundingsource}}
+                .col-sm-2
+                  .entry
+                    | {{iso.benefitamount}}
+                .col-sm-2
+                  .entry
+                    | {{iso.casestate}} - {{iso.isostate}}
+                .col-sm-1
+                  i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
+                .col-sm-1
+                  i.fa.fa-reply-all.fa-lg(aria-hidden="true",ng-click='$ctrl.sendIsoResponse(iso)')
+              .row(ng-if="$ctrl.hasResponses(iso)")
+                .col-sm-8.col-sm-offset-2.bg-warning
+                  table.table.table-stripped.table-hover.table-condensed
+                    thead
+                      tr
+                        th
+                          span.responseEntryTitle
+                              | pid
+                        th
+                          span.responseEntryTitle
+                              | received
+                        th
+                          span.responseEntryTitle
+                              | score
+                        th
+                        th
+                    tbody
+                      tr(ng-repeat="isoresponse in $ctrl.isoresponses | filter: { caseid: iso.caseid }")
+                        td
+                          span.responseEntry
+                            | {{isoresponse.pid}}
+                        td
+                          span.responseEntry
+                            | {{isoresponse.createdat}}
+                        td
+                          span.responseEntry
+                            | {{isoresponse.score}}
+                        td
+                          i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(isoresponse)')                          
+                        td
+                          i.fa.fa-external-link.fa-lg(aria-hidden="true")                          
     .col-lg-4
       h1.page-header Logs:
       pre.pre-scrollable
@@ -95,7 +127,7 @@ script(type='text/ng-template',id='batchModalContent.html')
 script(type='text/ng-template',id='isoModalContent.html')
   .modal-header
     h3
-      | View ISO Processing
+      | View object
   .modal-body
     pre.pre-scrollable(ng-bind-html="doc | prettify")
   .modal-footer
