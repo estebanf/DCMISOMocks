@@ -105,7 +105,6 @@ export class MainController {
     this.$http.get('/api/isoresponsetracking')
       .then(response => {
         this.isoresponses = response.data;
-        console.log(this.isoresponses);
         this.socket.syncUpdates('isoresponsetracking', this.isoresponses)
       });
     this.$http.get('/api/activities')
@@ -116,7 +115,6 @@ export class MainController {
     this.$http.get('/api/diaries')
       .then(response => {
         this.diaries = response.data;
-        console.log(this.diaries);
         this.socket.syncUpdates('diaries', this.diaries)
       });
   }
