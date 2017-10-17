@@ -8,7 +8,7 @@ import {EventEmitter} from 'events';
 var DiaryEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-DiaryEvents.setMaxListeners(0);
+// DiaryEvents.setMaxListeners(0);
 
 // Model events
 var events = {

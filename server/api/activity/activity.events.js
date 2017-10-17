@@ -8,7 +8,7 @@ import {EventEmitter} from 'events';
 var ActivityEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-ActivityEvents.setMaxListeners(0);
+// ActivityEvents.setMaxListeners(0);
 
 // Model events
 var events = {

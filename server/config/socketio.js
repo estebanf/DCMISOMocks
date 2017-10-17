@@ -3,6 +3,8 @@
  */
 'use strict';
 
+require('events').EventEmitter.prototype._maxListeners = 100;
+
 // import config from './environment';
 
 // When the user disconnects.. perform this

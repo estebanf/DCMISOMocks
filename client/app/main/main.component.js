@@ -20,8 +20,8 @@ export class MainController {
       socket.unsyncUpdates('batchtracking');
       socket.unsyncUpdates('isotracking');
       socket.unsyncUpdates('isoresponsetracking');
-      socket.unsyncUpdates('activities');
-      socket.unsyncUpdates('diaries');
+      socket.unsyncUpdates('Activity');
+      socket.unsyncUpdates('diary');
     });
   }
 
@@ -110,12 +110,12 @@ export class MainController {
     this.$http.get('/api/activities')
       .then(response => {
         this.activities = response.data;
-        this.socket.syncUpdates('activities', this.activities)
+        this.socket.syncUpdates('Activity', this.activities)
       });
     this.$http.get('/api/diaries')
       .then(response => {
         this.diaries = response.data;
-        this.socket.syncUpdates('diaries', this.diaries)
+        this.socket.syncUpdates('diary', this.diaries)
       });
   }
 }

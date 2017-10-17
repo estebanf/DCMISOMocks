@@ -8,7 +8,7 @@ import {EventEmitter} from 'events';
 import config from '../../config/environment';
 
 var LogEvents = new EventEmitter();
-LogEvents.setMaxListeners(0);
+// LogEvents.setMaxListeners(0);
 
 var batches = [];
 function loadBatches(cb){
