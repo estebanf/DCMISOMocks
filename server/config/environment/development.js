@@ -7,9 +7,16 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://bpms.everteam.us/dcmisomocks'
+    uri: 'mongodb://localhost/dcmisomocks'
   },
 
+  api: {
+    uri: 'http://localhost:3005/'
+  },
+
+  bpm: {
+    uri: 'http://localhost:8080/everteam/'
+  },
   // Seed database on startup
   seedDB: true
 

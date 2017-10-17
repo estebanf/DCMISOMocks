@@ -3,6 +3,7 @@
 import jsonpatch from 'fast-json-patch';
 import fs from 'fs';
 import request from 'request';
+import config from '../../config/environment';
 
 var content = null;
 fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
@@ -12,12 +13,12 @@ fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
 function callBack(caseId){
 	var body = content.replace(/00000/g,caseId);
 	request({
-		url:'http://bpms.everteam.us:8080/everteam/ode/processes/LaunchPointProcess_Processes_Core_ProcessISOCase_Process_ISO_Case_DCM',
+		url:config.bpm.uri + 'ode/processes/LaunchPointProcess_Processes_Core_ProcessISOCase_Process_ISO_Case_DCM',
 		headers:{
 			'Content-Type': 'text/xml; charset=utf-8'
 		},
 		method:'POST',
-		body:body	
+		body:body
 	},function(err,res,data){
 		if(err){
 		}

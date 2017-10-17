@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ActivityEvents from './Activity.events';
+import ActivityEvents from './activity.events';
 
 // Model events to emit
 var events = ['save', 'remove'];

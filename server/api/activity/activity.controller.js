@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Activity from './Activity.model';
+import Activity from './activity.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;

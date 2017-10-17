@@ -4,13 +4,14 @@ import jsonpatch from 'fast-json-patch';
 import request from 'request';
 import _ from 'lodash';
 import {EventEmitter} from 'events';
+import config from '../../config/environment';
 
 var LogEvents = new EventEmitter();
 LogEvents.setMaxListeners(0);
 
 var isos = [];
 function loadIsos(cb){
-  request('http://bpms.everteam.us:3005/api/ISOCases',function(error,response,body){
+  request(config.api.uri + 'api/ISOCases',function(error,response,body){
   	var data =  _.map(JSON.parse(body),function(obj){
   		obj._id = obj.parentpid + "-" + obj.caseid;
   		return obj;
@@ -31,7 +32,7 @@ function checkBatches(){
 			if(existingId >= 0){
 				obj = new_isos[existingId];
 				LogEvents.emit("save:" + obj._id,obj);
-				LogEvents.emit("save",obj);				
+				LogEvents.emit("save",obj);
 			}
 		})
 		var del_elements = _.differenceWith(isos,new_isos,_.isEqual);

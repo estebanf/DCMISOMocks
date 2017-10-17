@@ -5,12 +5,14 @@ import request from 'request';
 import _ from 'lodash';
 import {EventEmitter} from 'events';
 
+import config from '../../config/environment';
+
 var LogEvents = new EventEmitter();
 LogEvents.setMaxListeners(0);
 
 var batches = [];
 function loadBatches(cb){
-  request('http://bpms.everteam.us:3005/api/batchtrackings',function(error,response,body){
+  request(config.api.uri + 'api/batchtrackings', function(error,response,body){
   	var data =  _.map(JSON.parse(body),function(obj){
   		obj._id = obj.pid;
   		return obj;

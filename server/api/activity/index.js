@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./Activity.controller');
+var controller = require('./activity.controller');
 
 var router = express.Router();
 

@@ -28,7 +28,7 @@ var ActivityIndex = proxyquire('./index.js', {
       return routerStub;
     }
   },
-  './Activity.controller': ActivityCtrlStub
+  './activity.controller': ActivityCtrlStub
 });
 
 describe('Activity API Router:', function() {
@@ -37,7 +37,7 @@ describe('Activity API Router:', function() {
   });
 
   describe('GET /api/activities', function() {
-    it('should route to Activity.controller.index', function() {
+    it('should route to activity.controller.index', function() {
       expect(routerStub.get
         .withArgs('/', 'ActivityCtrl.index')
         ).to.have.been.calledOnce;
@@ -45,7 +45,7 @@ describe('Activity API Router:', function() {
   });
 
   describe('GET /api/activities/:id', function() {
-    it('should route to Activity.controller.show', function() {
+    it('should route to activity.controller.show', function() {
       expect(routerStub.get
         .withArgs('/:id', 'ActivityCtrl.show')
         ).to.have.been.calledOnce;
@@ -53,7 +53,7 @@ describe('Activity API Router:', function() {
   });
 
   describe('POST /api/activities', function() {
-    it('should route to Activity.controller.create', function() {
+    it('should route to activity.controller.create', function() {
       expect(routerStub.post
         .withArgs('/', 'ActivityCtrl.create')
         ).to.have.been.calledOnce;
@@ -61,7 +61,7 @@ describe('Activity API Router:', function() {
   });
 
   describe('PUT /api/activities/:id', function() {
-    it('should route to Activity.controller.upsert', function() {
+    it('should route to activity.controller.upsert', function() {
       expect(routerStub.put
         .withArgs('/:id', 'ActivityCtrl.upsert')
         ).to.have.been.calledOnce;
@@ -77,7 +77,7 @@ describe('Activity API Router:', function() {
   });
 
   describe('DELETE /api/activities/:id', function() {
-    it('should route to Activity.controller.destroy', function() {
+    it('should route to activity.controller.destroy', function() {
       expect(routerStub.delete
         .withArgs('/:id', 'ActivityCtrl.destroy')
         ).to.have.been.calledOnce;
