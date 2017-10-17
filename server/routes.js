@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/isoscore', require('./api/isoscore'));
   app.use('/api/diaries', require('./api/diary'));
   app.use('/api/activities', require('./api/activity'));
   app.use('/api/logs', require('./api/log'));

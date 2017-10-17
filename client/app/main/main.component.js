@@ -67,6 +67,27 @@ export class MainController {
     this.$http.put('/api/iso/' + iso.requestid, {});
   }
 
+  sendIsoScoreModal(isoResponse) {
+    console.log("Got here?!");
+    var modalInstance = this.modal.open({
+      templateUrl: 'isoScoreModalContent.html',
+      size: 'lg',
+      controller: 'IsoScoreController',
+      resolve: {
+        isoresponse: function () {
+          return isoResponse;
+        }
+      }
+    });
+    modalInstance.result.then(data => {
+      console.log("Have some data? " + JSON.stringify(data));
+      this.$http.post('/api/isoscore', data);
+    }, function () {
+
+    });
+  }
+
+
   $onInit() {
     this.$http.get('/api/logs')
       .then(response => {

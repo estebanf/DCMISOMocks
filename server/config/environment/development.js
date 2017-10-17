@@ -15,7 +15,7 @@ module.exports = {
   },
 
   bpm: {
-    uri: 'http://localhost:8080/everteam/'
+    uri: 'http://192.168.241.200:8080/everteam/'
   },
   // Seed database on startup
   seedDB: true

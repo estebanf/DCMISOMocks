@@ -77,7 +77,7 @@
                         td
                           i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(isoresponse)')
                         td
-                          i.fa.fa-external-link.fa-lg(aria-hidden="true")
+                          i.fa.fa-external-link.fa-lg(aria-hidden="true", ng-click='$ctrl.sendIsoScoreModal(isoresponse)')
     .col-lg-4
       .row
         h1.page-header Logs:
@@ -177,3 +177,57 @@ script(type='text/ng-template',id='isoModalContent.html')
     button.btn.btn-primar(type="button",ng-click="cancel()")
       | &nbsp;Ok
 
+script(type='text/ng-template',id='batchModalContent.html')
+  .modal-header
+    h3
+      | Create new batch
+  .modal-body
+    form.form-inline
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="ISOIndicator",ng-model="newCase.isoIndicator")
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="Score",ng-model="newCase.score")
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="FundingSource",ng-model="newCase.FundingSource")
+      button.btn.btn-primary.pull-right(ng-click="addCase()")
+        i.fa.fa-plus-square(aria-hidden="true")
+        | &nbsp; Add
+      button.btn.btn-warning.form-space.pull-right(ng-click="randomCase()")
+        i.fa.fa-random(aria-hidden="true")
+        | &nbsp; Random
+    pre.pre-scrollable(ng-bind-html="doc | prettify")
+  .modal-footer
+    button.btn.btn-primary(type="button",ng-click="ok()")
+      i.fa.fa-paper-plane-o(aria-hidden="true")
+      | &nbsp;Submit
+    button.btn.btn-danger(type="button",ng-click="cancel()")
+      i.fa.fa-undo(aria-hidden="true")
+      | &nbsp;Cancel
+
+script(type='text/ng-template',id='isoScoreModalContent.html')
+  .modal-header
+    h3
+      | Send ISO score
+  .modal-body
+    form.form-inline
+      .form-group
+        label.form-space Status
+        select.form-control.form-space(required=true,ng-model="newScore.status")
+          option(value='-- Select --', selected= true) -- Select --
+          option(value='Pending') Pending
+          option(value='Complete') Complete
+      .form-group
+        label.form-space Score
+        select.form-control.form-space(required=true,ng-model="newScore.score")
+          option(value='-- Select --', selected= true) -- Select --
+          option(value='MISS') MISS
+          option(value='HIT') HIT
+          option(value='MATCH') MATCH
+    pre.pre-scrollable(ng-bind-html="doc | prettify")
+  .modal-footer
+    button.btn.btn-primary(type="button",ng-click="ok()")
+      i.fa.fa-paper-plane-o(aria-hidden="true")
+      | &nbsp;Submit
+    button.btn.btn-danger(type="button",ng-click="cancel()")
+      i.fa.fa-undo(aria-hidden="true")
+      | &nbsp;Cancel

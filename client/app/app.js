@@ -21,6 +21,7 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import batch from './batch/batch.controller';
 import iso from './iso/iso.controller';
+import isoScore from './isoscore/isoscore.controller';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -28,7 +29,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 var app = angular.module('dcmisomocksApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, navbar, footer, main,batch,iso,constants, socket, util,"angular-uuid"
+  uiBootstrap, navbar, footer, main,batch,iso, isoScore, constants, socket, util,"angular-uuid"
 ])
   .config(routeConfig);
 
@@ -51,8 +52,8 @@ app.filter('prettify',function(){
             return '<span class="' + cls + '">' + match + '</span>';
         });
     }
-    
-    return syntaxHighlight;	
+
+    return syntaxHighlight;
 })
 angular.element(document)
   .ready(() => {
