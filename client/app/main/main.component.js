@@ -5,6 +5,7 @@ export class MainController {
   logs = [];
   batchs = [];
   isos = [];
+  isoresponses = []
 
   /*@ngInject*/
   constructor($http, $scope, socket,$uibModal) {
@@ -15,6 +16,7 @@ export class MainController {
       socket.unsyncUpdates('log');
       socket.unsyncUpdates('batchtracking');
       socket.unsyncUpdates('isotracking');
+      socket.unsyncUpdates('isoresponsetracking');
     });
   }
   openModal() {
@@ -28,6 +30,12 @@ export class MainController {
     },function(){
 
     })
+  }
+  hasResponses(iso){
+    var obj = this.isoresponses.filter(function(item){
+      return iso.caseid == item.caseid;
+    })
+    return obj.length > 0;
   }
   openIsoModal(iso) {
     var modalInstance = this.modal.open({
@@ -46,6 +54,9 @@ export class MainController {
 
     })    
   }
+  sendIsoResponse(iso){
+    this.$http.put('/api/iso/' + iso.requestid, {});
+  }
   $onInit() {
     this.$http.get('/api/logs')
       .then(response => {
@@ -61,6 +72,12 @@ export class MainController {
       .then(response => {
         this.isos = response.data;
         this.socket.syncUpdates('isotracking',this.isos)
+      })
+    this.$http.get('/api/isoresponsetracking')
+      .then(response => {
+        this.isoresponses = response.data;
+        console.log(this.isoresponses);
+        this.socket.syncUpdates('isoresponsetracking',this.isoresponses)
       })
   }
 }

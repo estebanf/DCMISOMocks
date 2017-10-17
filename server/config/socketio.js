@@ -21,6 +21,7 @@ function onConnect(socket) {
   require('../api/log/log.socket').register(socket);
   require('../api/batchtracking/batchtracking.socket').register(socket)
   require('../api/isotracking/isotracking.socket').register(socket)
+  require('../api/isoresponsetracking/isoresponsetracking.socket').register(socket)
 }
 
 export default function(socketio) {
