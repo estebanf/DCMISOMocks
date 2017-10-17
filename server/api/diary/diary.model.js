@@ -8,7 +8,7 @@ var DiarySchema = new mongoose.Schema({
   batch_id: String,
   case_id: String,
   request_id: String,
-  activity_type: String,
+  diary_type: String,
   description: String,
   created_at: Date,
   updated_at: Date

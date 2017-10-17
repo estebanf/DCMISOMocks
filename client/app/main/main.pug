@@ -75,28 +75,65 @@
                           span.responseEntry
                             | {{isoresponse.score}}
                         td
-                          i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(isoresponse)')                          
+                          i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(isoresponse)')
                         td
-                          i.fa.fa-external-link.fa-lg(aria-hidden="true")                          
+                          i.fa.fa-external-link.fa-lg(aria-hidden="true")
     .col-lg-4
-      h1.page-header Logs:
-      pre.pre-scrollable
-        p.logs(ng-repeat='log in $ctrl.logs | orderBy: "created_at" : true')
-          | pid: 
-          span#value
-            | {{log.process_instance_id}}
-          |, batch_id:
-          span#value
-            | {{log.batch_id}}
-          |, case_id:
-          span#value
-            | {{log.case_id}}
-          |, step_id:
-          span#value
-            | {{log.step_id}}
-          |, description:
-          span#value
-            | {{log.description}}
+      .row
+        h1.page-header Logs:
+        pre.pre-scrollable
+          p.logs(ng-repeat='log in $ctrl.logs | orderBy: "created_at" : true')
+            | pid:
+            span#value
+              | {{log.process_instance_id}}
+            |, batch_id:
+            span#value
+              | {{log.batch_id}}
+            |, case_id:
+            span#value
+              | {{log.case_id}}
+            |, step_id:
+            span#value
+              | {{log.step_id}}
+            |, description:
+            span#value
+              | {{log.description}}
+        h1.page-header Activities:
+        pre.pre-scrollable
+          p.logs(ng-repeat='activity in $ctrl.activities | orderBy: "created_at" : true')
+            | pid:
+            span#value
+              | {{activity.process_instance_id}}
+            | , batch_id:
+            span#value
+              | {{activity.batch_id}}
+            | , case_id:
+            span#value
+              | {{activity.case_id}}
+            | , activity_type:
+            span#value
+              | {{activity.activity_type}}
+            | , description:
+            span#value
+              | {{activity.description}}
+        h1.page-header Diaries:
+        pre.pre-scrollable
+          p.logs(ng-repeat='diary in $ctrl.diaries | orderBy: "created_at" : true')
+            | pid:
+            span#value
+              | {{diary.process_instance_id}}
+            | , batch_id:
+            span#value
+              | {{diary.batch_id}}
+            | , case_id:
+            span#value
+              | {{diary.case_id}}
+            | , diary_type:
+            span#value
+              | {{diary.diary_type}}
+            | , description:
+            span#value
+              | {{diary.description}}
 script(type='text/ng-template',id='batchModalContent.html')
   .modal-header
     h3
@@ -110,8 +147,8 @@ script(type='text/ng-template',id='batchModalContent.html')
       .form-group
         input.form-control.form-space(type="text",placeHolder="FundingSource",ng-model="newCase.FundingSource")
       button.btn.btn-primary.pull-right(ng-click="addCase()")
-        i.fa.fa-plus-square(aria-hidden="true") 
-        | &nbsp; Add        
+        i.fa.fa-plus-square(aria-hidden="true")
+        | &nbsp; Add
       button.btn.btn-warning.form-space.pull-right(ng-click="randomCase()")
         i.fa.fa-random(aria-hidden="true")
         | &nbsp; Random

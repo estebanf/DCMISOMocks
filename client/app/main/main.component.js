@@ -1,62 +1,72 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
+
 export class MainController {
   logs = [];
   batchs = [];
   isos = [];
-  isoresponses = []
+  isoresponses = [];
+  activities = [];
+  diaries = [];
 
   /*@ngInject*/
-  constructor($http, $scope, socket,$uibModal) {
+  constructor($http, $scope, socket, $uibModal) {
     this.$http = $http;
     this.socket = socket;
     this.modal = $uibModal;
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       socket.unsyncUpdates('log');
       socket.unsyncUpdates('batchtracking');
       socket.unsyncUpdates('isotracking');
       socket.unsyncUpdates('isoresponsetracking');
+      socket.unsyncUpdates('activities');
+      socket.unsyncUpdates('diaries');
     });
   }
+
   openModal() {
     var modalInstance = this.modal.open({
       templateUrl: 'batchModalContent.html',
-      size:'lg',
-      controller:'BatchController'
+      size: 'lg',
+      controller: 'BatchController'
     });
     modalInstance.result.then(data => {
-      this.$http.post('/api/batch',data);
-    },function(){
+      this.$http.post('/api/batch', data);
+    }, function () {
 
     })
   }
-  hasResponses(iso){
-    var obj = this.isoresponses.filter(function(item){
+
+  hasResponses(iso) {
+    var obj = this.isoresponses.filter(function (item) {
       return iso.caseid == item.caseid;
     })
     return obj.length > 0;
   }
+
   openIsoModal(iso) {
     var modalInstance = this.modal.open({
       templateUrl: 'isoModalContent.html',
-      size:'lg',
-      controller:'IsoController',
+      size: 'lg',
+      controller: 'IsoController',
       resolve: {
-        iso: function() {
+        iso: function () {
           return iso;
         }
       }
     });
     modalInstance.result.then(data => {
-      
-    },function(){
 
-    })    
+    }, function () {
+
+    })
   }
-  sendIsoResponse(iso){
+
+  sendIsoResponse(iso) {
     this.$http.put('/api/iso/' + iso.requestid, {});
   }
+
   $onInit() {
     this.$http.get('/api/logs')
       .then(response => {
@@ -66,19 +76,30 @@ export class MainController {
     this.$http.get('/api/batchtracking')
       .then(response => {
         this.batchs = response.data;
-        this.socket.syncUpdates('batchtracking',this.batchs);
-      })
+        this.socket.syncUpdates('batchtracking', this.batchs);
+      });
     this.$http.get('/api/isotracking')
       .then(response => {
         this.isos = response.data;
-        this.socket.syncUpdates('isotracking',this.isos)
-      })
+        this.socket.syncUpdates('isotracking', this.isos)
+      });
     this.$http.get('/api/isoresponsetracking')
       .then(response => {
         this.isoresponses = response.data;
         console.log(this.isoresponses);
-        this.socket.syncUpdates('isoresponsetracking',this.isoresponses)
-      })
+        this.socket.syncUpdates('isoresponsetracking', this.isoresponses)
+      });
+    this.$http.get('/api/activities')
+      .then(response => {
+        this.activities = response.data;
+        this.socket.syncUpdates('activities', this.activities)
+      });
+    this.$http.get('/api/diaries')
+      .then(response => {
+        this.diaries = response.data;
+        console.log(this.diaries);
+        this.socket.syncUpdates('diaries', this.diaries)
+      });
   }
 }
 
