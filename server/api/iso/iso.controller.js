@@ -4,6 +4,7 @@ import jsonpatch from 'fast-json-patch';
 import fs from 'fs';
 import uuid from 'uuid'
 import request from 'request';
+import config from '../../config/environment';
 
 var content = null;
 var contentResponse = null;
@@ -18,7 +19,7 @@ var xpath = require('xpath')
 var dom = require('xmldom').DOMParser
 
 export function create(req, res) {
-	
+
 	var doc = new dom().parseFromString(req.rawBody);
 	var select = xpath.useNamespaces({"Launchpoint":"http://www.example.org/Launchpoint"})
 	var nodes = select("//Launchpoint:caseId",doc);
@@ -35,12 +36,12 @@ export function upsert(req, res) {
 	var id = req.params.id;
 	var body = contentResponse.replace(/00000/g,id);
 	request({
-		url:'http://bpms.everteam.us:8080/everteam/ode/processes/LaunchPointProcess_Processes_Core_ProcessISOResponse_ISO_Response_Manager_ISO',
+		url:config.bpm.uri + 'ode/processes/LaunchPointProcess_Processes_Core_ProcessISOResponse_ISO_Response_Manager_ISO',
 		headers:{
 			'Content-Type': 'text/xml; charset=utf-8'
 		},
 		method:'POST',
-		body:body	
+		body:body
 	},function(err,resp,data){
 		if(err){
 		}
@@ -48,5 +49,5 @@ export function upsert(req, res) {
 			res.status(200);
 			res.send({});
 		}
-	});	
+	});
 }
