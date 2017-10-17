@@ -10,7 +10,7 @@
             | BatchID: {{batch.batchid}}, Client: {{batch.clientid}}, EnvId: {{ batch.environmentid}}
         .panel-body
           .row
-            .col-sm-3
+            .col-sm-2
               h5
                 | caseid
             .col-sm-2
@@ -22,8 +22,11 @@
             .col-sm-2
               h5
                 | benefitamount
+            .col-sm-2
+              h5
+                | status
           .row(ng-repeat="iso in $ctrl.isos | filter: { batchid: batch.batchid }")
-            .col-sm-3
+            .col-sm-2
               .entry
                 | {{iso.caseid}}
             .col-sm-2
@@ -35,10 +38,13 @@
             .col-sm-2
               .entry
                 | {{iso.benefitamount}}
+            .col-sm-2
+              .entry
+                | {{iso.casestate}} - {{iso.isostate}}
             .col-sm-1
               i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
             .col-sm-1
-              i.fa.fa-reply-all.fa-lg(aria-hidden="true",ng-click='$ctrl.openModal()')
+              i.fa.fa-reply-all.fa-lg(aria-hidden="true",ng-click='$ctrl.sendIsoResponse(iso)')
 
     .col-lg-4
       h1.page-header Logs:

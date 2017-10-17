@@ -3,10 +3,15 @@
 import jsonpatch from 'fast-json-patch';
 import fs from 'fs';
 import uuid from 'uuid'
+import request from 'request';
 
 var content = null;
+var contentResponse = null;
 fs.readFile('server/api/iso/ISOACK.xml','utf8',function(err,data){
   content = data;
+});
+fs.readFile('server/api/iso/ISOResponse.xml','utf8',function(err,data){
+  contentResponse = data;
 });
 
 var xpath = require('xpath')
@@ -24,4 +29,24 @@ export function create(req, res) {
 	res.status(200);
 	res.header("Content-Type","application/xml");
 	res.send(body);
+}
+
+export function upsert(req, res) {
+	var id = req.params.id;
+	var body = contentResponse.replace(/00000/g,id);
+	request({
+		url:'http://bpms.everteam.us:8080/everteam/ode/processes/LaunchPointProcess_Processes_Core_ProcessISOResponse_ISO_Response_Manager_ISO',
+		headers:{
+			'Content-Type': 'text/xml; charset=utf-8'
+		},
+		method:'POST',
+		body:body	
+	},function(err,resp,data){
+		if(err){
+		}
+		else{
+			res.status(200);
+			res.send({});
+		}
+	});	
 }

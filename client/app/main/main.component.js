@@ -46,6 +46,9 @@ export class MainController {
 
     })    
   }
+  sendIsoResponse(iso){
+    this.$http.put('/api/iso/' + iso.requestid, {});
+  }
   $onInit() {
     this.$http.get('/api/logs')
       .then(response => {
