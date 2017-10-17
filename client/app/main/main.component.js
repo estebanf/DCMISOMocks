@@ -29,6 +29,23 @@ export class MainController {
 
     })
   }
+  openIsoModal(iso) {
+    var modalInstance = this.modal.open({
+      templateUrl: 'isoModalContent.html',
+      size:'lg',
+      controller:'IsoController',
+      resolve: {
+        iso: function() {
+          return iso;
+        }
+      }
+    });
+    modalInstance.result.then(data => {
+      
+    },function(){
+
+    })    
+  }
   $onInit() {
     this.$http.get('/api/logs')
       .then(response => {

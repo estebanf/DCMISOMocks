@@ -36,9 +36,9 @@
               .entry
                 | {{iso.benefitamount}}
             .col-sm-1
-              i.fa.fa-eye(aria-hidden="true",ng-click='$ctrl.openModal()')
+              i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
             .col-sm-1
-              i.fa.fa-reply-all(aria-hidden="true",ng-click='$ctrl.openModal()')
+              i.fa.fa-reply-all.fa-lg(aria-hidden="true",ng-click='$ctrl.openModal()')
 
     .col-lg-4
       h1.page-header Logs:
@@ -85,4 +85,14 @@ script(type='text/ng-template',id='batchModalContent.html')
     button.btn.btn-danger(type="button",ng-click="cancel()")
       i.fa.fa-undo(aria-hidden="true")
       | &nbsp;Cancel
+
+script(type='text/ng-template',id='isoModalContent.html')
+  .modal-header
+    h3
+      | View ISO Processing
+  .modal-body
+    pre.pre-scrollable(ng-bind-html="doc | prettify")
+  .modal-footer
+    button.btn.btn-primar(type="button",ng-click="cancel()")
+      | &nbsp;Ok
 
