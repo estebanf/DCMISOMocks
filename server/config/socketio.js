@@ -16,6 +16,8 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/diary/diary.socket').register(socket);
+  require('../api/activity/activity.socket').register(socket);
   require('../api/log/log.socket').register(socket);
   require('../api/batchtracking/batchtracking.socket').register(socket)
   require('../api/isotracking/isotracking.socket').register(socket)

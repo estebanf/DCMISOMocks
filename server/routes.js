@@ -9,6 +9,8 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/diaries', require('./api/diary'));
+  app.use('/api/activities', require('./api/activity'));
   app.use('/api/logs', require('./api/log'));
   app.use('/api/batchtracking',require('./api/batchtracking'))
   app.use('/api/iso',require('./api/iso'))
