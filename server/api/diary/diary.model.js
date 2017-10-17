@@ -4,14 +4,16 @@ import mongoose from 'mongoose';
 import {registerEvents} from './diary.events';
 
 var DiarySchema = new mongoose.Schema({
-  process_instance_id: String,
-  batch_id: String,
+  client_id: String,
   case_id: String,
-  request_id: String,
+  created_by: String,
   diary_type: String,
+  diary_status: String,
+  due_date: Date,
+  diary_from: String,
+  diary_to: String,
   description: String,
-  created_at: Date,
-  updated_at: Date
+  created_at: Date
 });
 
 registerEvents(DiarySchema);

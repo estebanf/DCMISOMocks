@@ -101,15 +101,15 @@
         h1.page-header Activities:
         pre.pre-scrollable
           p.logs(ng-repeat='activity in $ctrl.activities | orderBy: "created_at" : true')
-            | pid:
+            | client_id:
             span#value
-              | {{activity.process_instance_id}}
-            | , batch_id:
-            span#value
-              | {{activity.batch_id}}
+              | {{activity.client_id}}
             | , case_id:
             span#value
               | {{activity.case_id}}
+            | , created_by:
+            span#value
+              | {{activity.created_by}}
             | , activity_type:
             span#value
               | {{activity.activity_type}}
@@ -119,18 +119,24 @@
         h1.page-header Diaries:
         pre.pre-scrollable
           p.logs(ng-repeat='diary in $ctrl.diaries | orderBy: "created_at" : true')
-            | pid:
+            | client_id:
             span#value
-              | {{diary.process_instance_id}}
-            | , batch_id:
-            span#value
-              | {{diary.batch_id}}
+              | {{diary.client_id}}
             | , case_id:
             span#value
               | {{diary.case_id}}
+            | , created_by:
+            span#value
+              | {{diary.created_by}}
             | , diary_type:
             span#value
               | {{diary.diary_type}}
+            | , diary_status:
+            span#value
+              | {{diary.diary_status}}
+            | , due_date:
+            span#value
+              | {{diary.due_date}}
             | , description:
             span#value
               | {{diary.description}}
