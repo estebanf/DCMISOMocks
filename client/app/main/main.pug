@@ -214,8 +214,8 @@ script(type='text/ng-template',id='isoScoreModalContent.html')
         label.form-space Status
         select.form-control.form-space(required=true,ng-model="newScore.status")
           option(value='-- Select --', selected= true) -- Select --
-          option(value='Pending') Pending
-          option(value='Complete') Complete
+          option(value='OPEN') OPEN
+          option(value='CWOC') CWOC
       .form-group
         label.form-space Score
         select.form-control.form-space(required=true,ng-model="newScore.score")
@@ -223,7 +223,8 @@ script(type='text/ng-template',id='isoScoreModalContent.html')
           option(value='MISS') MISS
           option(value='HIT') HIT
           option(value='MATCH') MATCH
-    pre.pre-scrollable(ng-bind-html="doc | prettify")
+          option(value='REJECTED') REJECTED
+    //- pre.pre-scrollable(ng-bind-html="doc | prettify")
   .modal-footer
     button.btn.btn-primary(type="button",ng-click="ok()")
       i.fa.fa-paper-plane-o(aria-hidden="true")
