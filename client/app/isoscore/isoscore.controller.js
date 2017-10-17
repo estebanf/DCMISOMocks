@@ -4,20 +4,18 @@ const angular = require('angular');
 
 /*@ngInject*/
 export function isoScoreController($scope, $uibModalInstance, isoresponse) {
-  $scope.doc = JSON.stringify(isoresponse).replace(/\,/g,",\n");
+  $scope.doc = JSON.stringify(isoresponse).replace(/\,/g,',\n');
   $scope.newScore = {
     caseId: isoresponse.caseid,
-    status: "",
-    score: ""
+    status: '',
+    score: ''
   };
 
 
-  $scope.ok = function () {
-    console.log("Submitted " + JSON.stringify($scope.newScore));
+  $scope.ok = function() {
     $uibModalInstance.close($scope.newScore);
   };
-  $scope.cancel = function () {
-    console.log("Cancelled");
+  $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   };
 }

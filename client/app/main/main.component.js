@@ -68,21 +68,19 @@ export class MainController {
   }
 
   sendIsoScoreModal(isoResponse) {
-    console.log("Got here?!");
     var modalInstance = this.modal.open({
       templateUrl: 'isoScoreModalContent.html',
       size: 'lg',
       controller: 'IsoScoreController',
       resolve: {
-        isoresponse: function () {
+        isoresponse: function() {
           return isoResponse;
         }
       }
     });
     modalInstance.result.then(data => {
-      console.log("Have some data? " + JSON.stringify(data));
       this.$http.post('/api/isoscore', data);
-    }, function () {
+    }, function() {
 
     });
   }
