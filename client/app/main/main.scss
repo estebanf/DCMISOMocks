@@ -34,7 +34,7 @@
   font-weight: bold;
 }
 .pre-scrollable {
-    max-height: 500px;
+    max-height: 200px;
     overflow-y: scroll;
 }
 
@@ -57,4 +57,10 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 }
 .responseEntry {
   font-size: 10px;
+}
+.row-bordered:after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #ccc;
+  margin: 0 15px;
 }

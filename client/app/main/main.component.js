@@ -44,6 +44,19 @@ export class MainController {
     })
     return obj.length > 0;
   }
+  hasDiaries(iso){
+    var obj = this.diaries.filter(function (item) {
+      return iso.caseid == item.case_id;
+    })
+    return obj.length > 0;
+  }
+  hasActivities(iso){
+    var obj = this.activities.filter(function (item) {
+      return iso.caseid == item.case_id;
+    })
+    return obj.length > 0;
+  }
+
 
   openIsoModal(iso) {
     var modalInstance = this.modal.open({

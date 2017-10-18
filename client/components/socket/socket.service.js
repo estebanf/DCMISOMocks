@@ -38,7 +38,6 @@ function Socket(socketFactory) {
        * Syncs item creation/updates on 'model:save'
        */
       socket.on(`${modelName}:save`, function(item) {
-        console.log(modelName + ":save")
         var oldItem = _.find(array, {
           _id: item._id
         });
@@ -61,7 +60,6 @@ function Socket(socketFactory) {
        * Syncs removed items on 'model:remove'
        */
       socket.on(`${modelName}:remove`, function(item) {
-        console.log(modelName + ":remove")
         var event = 'deleted';
         _.remove(array, {
           _id: item._id
