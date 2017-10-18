@@ -34,7 +34,11 @@
   font-weight: bold;
 }
 .pre-scrollable {
-    max-height: 200px;
+    max-height: 150px;
+    overflow-y: scroll;
+}
+.pre-scrollable-large {
+    max-height: 600px;
     overflow-y: scroll;
 }
 

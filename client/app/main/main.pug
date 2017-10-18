@@ -39,12 +39,13 @@
         | Environment ID
   .row.row-bordered.bg-info(ng-repeat='batch in $ctrl.batchs | orderBy: "created_at" : true')
     .col-lg-4
-      | {{batch.batchid}}
+      a(ng-click="batch.isCollapsed = !batch.isCollapsed")
+        | {{batch.batchid}}
     .col-lg-4
       | {{batch.clientid}}
     .col-lg-4
       | {{batch.environmentid}}
-    .row
+    .row(uib-collapse="!batch.isCollapsed")
       .col-lg-11.col-lg-offset-1
         h5
           | Cases
@@ -67,7 +68,8 @@
           .col-lg-1
         .row.row-bordered.bg-warning(ng-repeat="iso in $ctrl.isos | filter: { batchid: batch.batchid }")
           .col-lg-3
-            | {{iso.caseid}}
+            a(ng-click="iso.isCollapsed = !iso.isCollapsed")
+              | {{iso.caseid}}
           .col-lg-2
             | {{iso.score}}
           .col-lg-2
@@ -78,7 +80,7 @@
             | {{iso.casestate}} - {{iso.isostate}}
           .col-lg-1
             i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
-          .row(ng-if="$ctrl.hasResponses(iso)")
+          .row(ng-if="$ctrl.hasResponses(iso)",uib-collapse="iso.isCollapsed")
             .col-lg-11.col-lg-offset-1
               h5
                 | ISO Responses
@@ -102,7 +104,7 @@
                   | {{isoresponse.score}}
                 .col-lg-2
                   i.fa.fa-external-link.fa-lg(aria-hidden="true", ng-click='$ctrl.sendIsoScoreModal(isoresponse)')              
-          .row(ng-if="$ctrl.hasActivities(iso)")
+          .row(ng-if="$ctrl.hasActivities(iso)",uib-collapse="iso.isCollapsed")
             .col-lg-11.col-lg-offset-1
               h5
                 | Activities
@@ -119,7 +121,7 @@
                   | {{activity._id}}
                 .col-lg-2
                   | {{activity.activity_type}}
-          .row(ng-if="$ctrl.hasDiaries(iso)")
+          .row(ng-if="$ctrl.hasDiaries(iso)",uib-collapse="iso.isCollapsed")
             .col-lg-11.col-lg-offset-1
               h5
                 | Diaries
@@ -141,147 +143,6 @@
                   | {{diary.diary_type}}
                 .col-lg-2
                   | {{diary.diary_status}}
-  //- .row
-  //-   .col-lg-8
-  //-     h1.page-header Batchs
-  //-       button.btn.btn-primary.pull-right(ng-click='$ctrl.openModal()')
-  //-         i.fa.fa-file-o(aria-hidden="true")
-  //-     .panel.panel-default(ng-repeat='batch in $ctrl.batchs | orderBy: "created_at" : true')
-  //-       .panel-heading
-  //-         .h4
-  //-           | BatchID: {{batch.batchid}}, Client: {{batch.clientid}}, EnvId: {{ batch.environmentid}}
-  //-       .panel-body
-  //-         .row
-  //-           .col-sm-2
-  //-             h5
-  //-               | caseid
-  //-           .col-sm-2
-  //-             h5
-  //-               | score
-  //-           .col-sm-2
-  //-             h5
-  //-               | fundingSource
-  //-           .col-sm-2
-  //-             h5
-  //-               | benefitamount
-  //-           .col-sm-2
-  //-             h5
-  //-               | status
-  //-         .row(ng-repeat="iso in $ctrl.isos | filter: { batchid: batch.batchid }")
-  //-           .col-sm-12
-  //-             .row
-  //-               .col-sm-2
-  //-                 .entry
-  //-                   | {{iso.caseid}}
-  //-               .col-sm-2
-  //-                 .entry
-  //-                   | {{iso.score}}
-  //-               .col-sm-2
-  //-                 .entry
-  //-                   | {{iso.fundingsource}}
-  //-               .col-sm-2
-  //-                 .entry
-  //-                   | {{iso.benefitamount}}
-  //-               .col-sm-2
-  //-                 .entry
-  //-                   | {{iso.casestate}} - {{iso.isostate}}
-  //-               .col-sm-1
-  //-                 i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
-  //-               .col-sm-1
-  //-                 i.fa.fa-reply-all.fa-lg(aria-hidden="true",ng-click='$ctrl.sendIsoResponse(iso)')
-  //-             .row(ng-if="$ctrl.hasResponses(iso)")
-  //-               .col-sm-8.col-sm-offset-2.bg-warning
-  //-                 table.table.table-stripped.table-hover.table-condensed
-  //-                   thead
-  //-                     tr
-  //-                       th
-  //-                         span.responseEntryTitle
-  //-                             | pid
-  //-                       th
-  //-                         span.responseEntryTitle
-  //-                             | received
-  //-                       th
-  //-                         span.responseEntryTitle
-  //-                             | score
-  //-                       th
-  //-                       th
-  //-                   tbody
-  //-                     tr(ng-repeat="isoresponse in $ctrl.isoresponses | filter: { caseid: iso.caseid }")
-  //-                       td
-  //-                         span.responseEntry
-  //-                           | {{isoresponse.pid}}
-  //-                       td
-  //-                         span.responseEntry
-  //-                           | {{isoresponse.createdat}}
-  //-                       td
-  //-                         span.responseEntry
-  //-                           | {{isoresponse.score}}
-  //-                       td
-  //-                         i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(isoresponse)')
-  //-                       td
-  //-                         i.fa.fa-external-link.fa-lg(aria-hidden="true", ng-click='$ctrl.sendIsoScoreModal(isoresponse)')
-  //-   .col-lg-4
-  //-     .row
-  //-       h1.page-header Logs:
-  //-       pre.pre-scrollable
-  //-         p.logs(ng-repeat='log in $ctrl.logs | orderBy: "created_at" : true')
-  //-           | pid:
-  //-           span#value
-  //-             | {{log.process_instance_id}}
-  //-           |, batch_id:
-  //-           span#value
-  //-             | {{log.batch_id}}
-  //-           |, case_id:
-  //-           span#value
-  //-             | {{log.case_id}}
-  //-           |, step_id:
-  //-           span#value
-  //-             | {{log.step_id}}
-  //-           |, description:
-  //-           span#value
-  //-             | {{log.description}}
-  //-       h1.page-header Activities:
-  //-       pre.pre-scrollable
-  //-         p.logs(ng-repeat='activity in $ctrl.activities | orderBy: "created_at" : true')
-  //-           | client_id:
-  //-           span#value
-  //-             | {{activity.client_id}}
-  //-           | , case_id:
-  //-           span#value
-  //-             | {{activity.case_id}}
-  //-           | , created_by:
-  //-           span#value
-  //-             | {{activity.created_by}}
-  //-           | , activity_type:
-  //-           span#value
-  //-             | {{activity.activity_type}}
-  //-           | , description:
-  //-           span#value
-  //-             | {{activity.description}}
-  //-       h1.page-header Diaries:
-  //-       pre.pre-scrollable
-  //-         p.logs(ng-repeat='diary in $ctrl.diaries | orderBy: "created_at" : true')
-  //-           | client_id:
-  //-           span#value
-  //-             | {{diary.client_id}}
-  //-           | , case_id:
-  //-           span#value
-  //-             | {{diary.case_id}}
-  //-           | , created_by:
-  //-           span#value
-  //-             | {{diary.created_by}}
-  //-           | , diary_type:
-  //-           span#value
-  //-             | {{diary.diary_type}}
-  //-           | , diary_status:
-  //-           span#value
-  //-             | {{diary.diary_status}}
-  //-           | , due_date:
-  //-           span#value
-  //-             | {{diary.due_date}}
-  //-           | , description:
-  //-           span#value
-  //-             | {{diary.description}}
 script(type='text/ng-template',id='batchModalContent.html')
   .modal-header
     h3
@@ -294,13 +155,13 @@ script(type='text/ng-template',id='batchModalContent.html')
         input.form-control.form-space(type="text",placeHolder="Score",ng-model="newCase.score")
       .form-group
         input.form-control.form-space(type="text",placeHolder="FundingSource",ng-model="newCase.FundingSource")
+      .form-group
+        input.form-control.form-space(type="text",placeHolder="Benefit",ng-model="newCase.benefit")
       button.btn.btn-primary.pull-right(ng-click="addCase()")
         i.fa.fa-plus-square(aria-hidden="true")
-        | &nbsp; Add
       button.btn.btn-warning.form-space.pull-right(ng-click="randomCase()")
         i.fa.fa-random(aria-hidden="true")
-        | &nbsp; Random
-    pre.pre-scrollable(ng-bind-html="doc | prettify")
+    pre.pre-scrollable-large(ng-bind-html="doc | prettify")
   .modal-footer
     button.btn.btn-primary(type="button",ng-click="ok()")
       i.fa.fa-paper-plane-o(aria-hidden="true")
@@ -308,13 +169,12 @@ script(type='text/ng-template',id='batchModalContent.html')
     button.btn.btn-danger(type="button",ng-click="cancel()")
       i.fa.fa-undo(aria-hidden="true")
       | &nbsp;Cancel
-
 script(type='text/ng-template',id='isoModalContent.html')
   .modal-header
     h3
       | View object
   .modal-body
-    pre.pre-scrollable(ng-bind-html="doc | prettify")
+    pre.pre-scrollable-large(ng-bind-html="doc | prettify")
   .modal-footer
     button.btn.btn-primary(type="button",ng-click="ok()")
       i.fa.fa-paper-plane-o(aria-hidden="true")
@@ -322,34 +182,6 @@ script(type='text/ng-template',id='isoModalContent.html')
     button.btn.btn-danger(type="button",ng-click="cancel()")
       i.fa.fa-undo(aria-hidden="true")
       | &nbsp;Cancel
-
-script(type='text/ng-template',id='batchModalContent.html')
-  .modal-header
-    h3
-      | Create new batch
-  .modal-body
-    form.form-inline
-      .form-group
-        input.form-control.form-space(type="text",placeHolder="ISOIndicator",ng-model="newCase.isoIndicator")
-      .form-group
-        input.form-control.form-space(type="text",placeHolder="Score",ng-model="newCase.score")
-      .form-group
-        input.form-control.form-space(type="text",placeHolder="FundingSource",ng-model="newCase.FundingSource")
-      button.btn.btn-primary.pull-right(ng-click="addCase()")
-        i.fa.fa-plus-square(aria-hidden="true")
-        | &nbsp; Add
-      button.btn.btn-warning.form-space.pull-right(ng-click="randomCase()")
-        i.fa.fa-random(aria-hidden="true")
-        | &nbsp; Random
-    pre.pre-scrollable(ng-bind-html="doc | prettify")
-  .modal-footer
-    button.btn.btn-primary(type="button",ng-click="ok()")
-      i.fa.fa-paper-plane-o(aria-hidden="true")
-      | &nbsp;Submit
-    button.btn.btn-danger(type="button",ng-click="cancel()")
-      i.fa.fa-undo(aria-hidden="true")
-      | &nbsp;Cancel
-
 script(type='text/ng-template',id='isoScoreModalContent.html')
   .modal-header
     h3

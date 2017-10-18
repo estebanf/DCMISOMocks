@@ -15,13 +15,15 @@ export function batchController($scope, $uibModalInstance,uuid) {
   $scope.newCase = {
     isoIndicator:"",
     score:"",
-    FundingSource:""
+    FundingSource:"",
+    benefit:""
   }
   $scope.randomCase = function(){
     var random = Math.floor((Math.random()*10)+1);
     var randomX = Math.floor((Math.random()*10)+1);
     $scope.newCase.isoIndicator= (random >= 5) ? "1" : "0"
     $scope.newCase.score = Math.floor((Math.random()*100)+50);
+    $scope.newCase.benefit = Math.floor((Math.random()*100000)+30000);
     $scope.newCase.FundingSource = (randomX >= 5) ? "Medicaid" : "Other"
   }
   $scope.addCase =function(){
@@ -30,7 +32,7 @@ export function batchController($scope, $uibModalInstance,uuid) {
       ISOIndicator: $scope.newCase.isoIndicator,
       Score: $scope.newCase.score,
       AccidentDate:"2017-10-10T16:38:49-06:00",
-      BenefitAmount:"5000",
+      BenefitAmount:$scope.newCase.benefit,
       FundingSource:$scope.newCase.FundingSource,
       LOB:"Health",
       State:"CO",
@@ -45,7 +47,8 @@ export function batchController($scope, $uibModalInstance,uuid) {
     $scope.newCase = {
       isoIndicator:"",
       score:"",
-      FundingSource:""
+      FundingSource:"",
+      benefit:""
     } 
      
   }
