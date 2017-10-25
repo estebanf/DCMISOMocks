@@ -3,12 +3,62 @@
 
 import request from 'request';
 import config from '../../config/environment';
+import stomp from 'stomp';
 
 
 // Creates a new Isoscore in the DB
 export function create(req, res) {
+  // ToDo: Need to POST the JSON to the queue, instead of the XML to the process
 
-  var scoreResponse = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:iso="http://bpms.everteam.com/Processes/Core/ProcessISOResponse/ISO_Response_Manager" xmlns:laun="http://www.example.org/Launchpoint">\n' +
+  var stomp_args = {
+    port: 61613,
+    host: 'localhost',
+    debug: true,
+    login: 'guest',
+    passcode: 'guest',
+  }
+
+  var client = new stomp.Stomp(stomp_args);
+
+  var queue = '/queue/iso_score';
+
+  client.connect();
+
+  client.on('connected', function() {
+
+    client.send({
+      'destination': queue,
+      'body': JSON.stringify({
+        "batchId": "?",
+        "environmentId" : "?",
+        "caseId": req.body.caseId,
+        "score": req.body.score,
+        "status": req.body.status
+      }),
+      'persistent': 'true'
+    });
+
+/*
+    client.send({
+      'destination': queue,
+      'body': JSON.stringify({
+        "BatchId": 1,
+        "ClientId": 53,
+        "CaseId": req.body.caseId,
+        "ISOScore": req.body.score,
+        "Status": req.body.status
+      }),
+      'persistent': 'true'
+    });
+*/
+
+
+    client.disconnect();
+  });
+
+
+
+/*  var scoreResponse = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:iso="http://bpms.everteam.com/Processes/Core/ProcessISOResponse/ISO_Response_Manager" xmlns:laun="http://www.example.org/Launchpoint">\n' +
     '   <soapenv:Header/>\n' +
     '   <soapenv:Body>\n' +
     '      <iso:Receive_ScoringRequest>\n' +
@@ -34,5 +84,5 @@ export function create(req, res) {
       res.status(200);
       res.send({});
     }
-  });
+  });*/
 }
