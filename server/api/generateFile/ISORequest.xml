@@ -3,10 +3,9 @@
    <soapenv:Body>
       <laun:DCMISORequestFile>
          <laun:caseId>00000</laun:caseId>
-         <laun:content>
-            <Request>
-              <ClientID>48</ClientID>
-              <Environment>MC1-U-U</Environment>
+        <IsTest>true</IsTest>
+        <laun:requestId>1436</laun:requestId>
+        <laun:content>
               <Xml>
               <Cases>
                 <Case>
@@ -17,7 +16,7 @@
                       <ItemIdInfo>
                         <InsurerId>123456</InsurerId>
                       </ItemIdInfo>
-                      <ClaimsReported ReportedToRef="InsurerID"> 
+                      <ClaimsReported ReportedToRef="InsurerID">
                         <ReportedDt />
                       </ClaimsReported>
                       <LossDt>2015-06-09</LossDt>
@@ -86,9 +85,6 @@
                 </Case>
                 </Cases>
               </Xml>
-                <IsTest>true</IsTest>
-                <RequestID>1436</RequestID>
-              </Request>
          </laun:content>
       </laun:DCMISORequestFile>
    </soapenv:Body>
