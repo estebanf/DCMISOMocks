@@ -22,18 +22,29 @@ function loadBatches(cb){
 }
 loadBatches(function(data){
  	batches = data;
+ 	console.log('--initial batches--')
  });
 function checkBatches(){
 	loadBatches(function(data){
 		var new_batches = data;
+		console.log('--new batches --')
+		console.log(new_batches)
 		var del_elements = _.differenceWith(batches,new_batches,_.isEqual);
+		console.log('--new del_elements --')
+		console.log(del_elements)
 		var new_elements = _.differenceWith(new_batches,batches,_.isEqual);
+		console.log('--new new_elements --')
+		console.log(new_elements)
 		if(del_elements && del_elements.length > 0){
 			_.each(del_elements,function(obj){
+			console.log('--new obj --')
+			console.log(obj)
 				LogEvents.emit("remove:" + obj.pid,obj);
 				LogEvents.emit("remove",obj);
 			})
 			batches = _.xor(batches,del_elements);
+			console.log('--modified batches --')
+			console.log(batches)
 		}
 		if(new_elements && new_elements.length > 0){
 			_.each(new_elements,function(obj){
