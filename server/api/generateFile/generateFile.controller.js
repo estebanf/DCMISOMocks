@@ -12,22 +12,15 @@ fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
 });
 
 function callBack(caseId){
-  // ToDo: Need to POST the JSON to the queue, instead of the XML to the process
-
-
-
   var stomp_args = {
-    port: 61613,
-    host: 'localhost',
+    port: config.stomp.port,
+    host: config.stomp.host,
     debug: true,
-    login: 'guest',
-    passcode: 'guest',
+    login: config.stomp.user,
+    passcode: config.stomp.password
   };
 
   var client = new stomp.Stomp(stomp_args);
-
-  var queue = '/queue/iso_request';
-
   client.connect();
 
   client.on('connected', function() {
@@ -35,7 +28,7 @@ function callBack(caseId){
     var body = content.replace(/00000/g, caseId);
 
     client.send({
-      'destination': queue,
+      'destination': config.stomp.isoRequestQueue,
       'body': JSON.stringify({
         "caseId": caseId,
         "content": body
@@ -45,22 +38,6 @@ function callBack(caseId){
     });
   });
 }
-/*  console.log("Called the callback");
-	var body = content.replace(/00000/g,caseId);
-	request({
-		url:config.bpm.uri + 'ode/processes/LaunchPointProcess_Processes_Core_ProcessISOCase_Process_ISO_Case_DCM',
-		headers:{
-			'Content-Type': 'text/xml; charset=utf-8'
-		},
-		method:'POST',
-		body:body
-	},function(err,res,data){
-		if(err){
-		}
-		else{
-		}
-	});
-}*/
 
 export function create(req, res) {
   console.log("Sent a response");
