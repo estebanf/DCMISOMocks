@@ -4,16 +4,14 @@ import mongoose from 'mongoose';
 import {registerEvents} from './diary.events';
 
 var DiarySchema = new mongoose.Schema({
-  client_id: String,
-  case_id: String,
-  created_by: String,
-  diary_type: String,
-  diary_status: String,
-  due_date: Date,
-  diary_from: String,
-  diary_to: String,
-  description: String,
-  create_date: Date
+  ClientId: String,
+  CaseId: String,
+  CreateDate: Date,
+  CreatedBy: String,
+  DiaryType: String,
+  DiaryStatus: String,
+  DiaryFrom: String,
+  Description: String,
 });
 
 registerEvents(DiarySchema);

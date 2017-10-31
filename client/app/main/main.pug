@@ -136,13 +136,13 @@
                   h5
                     | Diary Status
                 .col-lg-2
-              .row.bg-danger.row-bordered(ng-repeat='diary in $ctrl.diaries | filter: { case_id: iso.caseid } | orderBy: "created_at" : true')
+              .row.bg-danger.row-bordered(ng-repeat='diary in $ctrl.diaries | filter: { CaseId: iso.caseid } | orderBy: "CreatedAt" : true')
                 .col-lg-3
                   | {{diary._id}}
                 .col-lg-2
-                  | {{diary.diary_type}}
+                  | {{diary.DiaryType}}
                 .col-lg-2
-                  | {{diary.diary_status}}
+                  | {{diary.DiaryStatus}}
 script(type='text/ng-template',id='batchModalContent.html')
   .modal-header
     h3

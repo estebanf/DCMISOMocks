@@ -46,7 +46,7 @@ export class MainController {
   }
   hasDiaries(iso){
     var obj = this.diaries.filter(function (item) {
-      return iso.caseid == item.case_id;
+      return iso.caseid == item.CaseId;
     })
     return obj.length > 0;
   }
