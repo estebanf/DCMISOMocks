@@ -52,7 +52,7 @@ export class MainController {
   }
   hasActivities(iso){
     var obj = this.activities.filter(function (item) {
-      return iso.caseid == item.case_id;
+      return iso.caseid == item.CaseId;
     })
     return obj.length > 0;
   }
