@@ -1,11 +1,17 @@
 'use strict';
 const angular = require('angular');
-
+var rn = require('random-number');
 
 /*@ngInject*/
 export function batchController($scope, $uibModalInstance,uuid) {
+  var gen = rn.generator({
+    min:  0,
+    max:  2147483647,
+    integer: true
+  });
+
   $scope.batch = {
-    BatchId: uuid.v4(),
+    BatchId: gen(),
     EnvironmentId: 1,
     ClientId: Math.floor((Math.random()*100)+1),
     TotalCaseCount: 0,
@@ -28,7 +34,7 @@ export function batchController($scope, $uibModalInstance,uuid) {
   }
   $scope.addCase =function(){
     var addCase = {
-      CaseId: uuid.v4(),
+      CaseId: gen(),
       ISOIndicator: $scope.newCase.isoIndicator,
       Score: $scope.newCase.score,
       AccidentDate:"2017-10-10T16:38:49-06:00",
@@ -39,7 +45,7 @@ export function batchController($scope, $uibModalInstance,uuid) {
       WorkComp:false,
       CaseStatus:"Investigate",
       CaseSource:"Generated",
-      SkipDuplicateCheck : false      
+      SkipDuplicateCheck : false
     }
     $scope.batch.Cases.push(addCase);
     $scope.batch.TotalCaseCount = $scope.batch.TotalCaseCount + 1;
@@ -49,8 +55,8 @@ export function batchController($scope, $uibModalInstance,uuid) {
       score:"",
       FundingSource:"",
       benefit:""
-    } 
-     
+    }
+
   }
 
   $scope.ok = function(){
