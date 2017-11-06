@@ -49,6 +49,7 @@ var all = {
     port: process.env.ACTIVEMQ_PORT || 61613,
     user: process.env.ACTIVEMQ_USER || 'admin',
     password: process.env.ACTIVEMQ_PASSWORD || 'admin',
+    batchCaseQueue: '/queue/BatchCases',
     isoRequestQueue: '/queue/iso_request',
     isoScoreQueue: '/queue/iso_score'
   }

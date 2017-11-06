@@ -1,6 +1,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
+import config from '../../config/environment';
 var mqClient = null;
 
 export function registerStompClient(stomp){
@@ -9,7 +10,7 @@ export function registerStompClient(stomp){
 
 export function create(req, res) {
 	mqClient.send({
-		'destination': '/queue/test',
+		'destination': config.stomp.batchCaseQueue,
 		'body': JSON.stringify(req.body),
 		'persistent':'true'
 	})
