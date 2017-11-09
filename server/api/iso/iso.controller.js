@@ -43,7 +43,6 @@ export function upsert(req, res) {
 		method:'POST',
 		body:body
 	},function(err,resp,data){
-		console.log(resp);
 		if(err){
 		}
 		else{
