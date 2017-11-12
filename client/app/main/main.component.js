@@ -113,7 +113,14 @@ export class MainController {
     this.$http.get('/api/isotracking')
       .then(response => {
         this.isos = response.data;
+
         this.socket.syncUpdates('isotracking', this.isos)
+      });
+    this.$http.get('/api/iqtracking')
+      .then(response => {
+        this.iqs = response.data;
+
+        this.socket.syncUpdates('iqtracking', this.iqs);
       });
     this.$http.get('/api/isoresponsetracking')
       .then(response => {

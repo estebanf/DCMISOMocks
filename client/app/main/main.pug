@@ -48,7 +48,7 @@
     .row(uib-collapse="!batch.isCollapsed")
       .col-lg-11.col-lg-offset-1
         h5
-          | Cases
+          | Isos
         .row.bg-warning.row-bordered
           .col-lg-3
             h5
@@ -71,13 +71,13 @@
             a(ng-click="iso.isCollapsed = !iso.isCollapsed")
               | {{iso.caseid}}
           .col-lg-2
-            | {{iso.score}}
+            | {{$ctrl.isos.length}}
           .col-lg-2
-            | {{iso.fundingsource}}
+            | {{$ctrl.iqs.length}}
           .col-lg-2
             | {{iso.benefitamount}}
           .col-lg-2
-            | {{iso.casestate}} - {{iso.isostate}}
+            | {{iso.casetype}} - {{iso.isostate}}
           .col-lg-1
             i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iso)')
           .row(ng-if="$ctrl.hasResponses(iso)",uib-collapse="iso.isCollapsed")
@@ -143,6 +143,39 @@
                   | {{diary.DiaryType}}
                 .col-lg-2
                   | {{diary.DiaryStatus}}
+        h5
+          | Iqs
+        .row.bg-warning.row-bordered
+          .col-lg-3
+            h5
+              | Case Id
+          .col-lg-2
+            h5
+              | Score
+          .col-lg-2
+            h5
+              | Funding source
+          .col-lg-2
+            h5
+              | Benefit amount
+          .col-lg-2
+            h5
+              | Status
+          .col-lg-1
+        .row.row-bordered.bg-warning(ng-repeat="iq in $ctrl.iqs | filter: { batchid: batch.batchid }")
+          .col-lg-3
+            a(ng-click="iq.isCollapsed = !iq.isCollapsed")
+              | {{iq.caseid}}
+          .col-lg-2
+            | {{iq.score}}
+          .col-lg-2
+            | {{iq.fundingsource}}
+          .col-lg-2
+            | {{iq.benefitamount}}
+          .col-lg-2
+            | {{iq.casetype}} - {{iq.isostate}}
+          .col-lg-1
+            i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iq)')
 script(type='text/ng-template',id='batchModalContent.html')
   .modal-header
     h3
