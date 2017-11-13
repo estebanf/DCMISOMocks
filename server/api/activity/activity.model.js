@@ -8,8 +8,8 @@ var ActivitySchema = new mongoose.Schema({
   CaseId: String,
   CreatedBy: String,
   ActivityType: String,
-  Description: String,
-  CreatedAt: Date
+  ActivityCode: String,
+  Description: String
 });
 
 registerEvents(ActivitySchema);
