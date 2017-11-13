@@ -73,8 +73,26 @@ export class MainController {
 
     }, function () {
 
-    })
+    });
   }
+    openIqModal(iq)
+    {
+      var modalInstance = this.modal.open({
+        templateUrl: 'iqModalContent.html',
+        size: 'lg',
+        controller: 'IqController',
+        resolve: {
+          iq: function () {
+            return iq;
+          }
+        }
+      });
+      modalInstance.result.then(data => {
+
+      }, function () {
+
+      })
+    }
 
   sendIsoResponse(iso) {
     this.$http.put('/api/iso/' + iso.requestid, {});

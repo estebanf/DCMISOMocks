@@ -175,7 +175,24 @@
           .col-lg-2
             | {{iq.casetype}} - {{iq.isostate}}
           .col-lg-1
-            i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIsoModal(iq)')
+            i.fa.fa-eye.fa-lg(aria-hidden="true",ng-click='$ctrl.openIqModal(iq)')
+          .row(ng-if="$ctrl.hasActivities(iq)",uib-collapse="iq.isCollapsed")
+            .col-lg-11.col-lg-offset-1
+              h5
+                | Activities
+              .row.bg-danger.row-bordered
+                .col-lg-3
+                  h5
+                    | _id
+                .col-lg-2
+                  h5
+                    | Activity Type
+                .col-lg-2
+              .row.bg-danger.row-bordered(ng-repeat='activity in $ctrl.activities | filter: { CaseId: iq.caseid } | orderBy: "CreatedAt" : true')
+                .col-lg-3
+                  | {{activity._id}}
+                .col-lg-2
+                  | {{activity.ActivityType}}
 script(type='text/ng-template',id='batchModalContent.html')
   .modal-header
     h3
@@ -240,6 +257,20 @@ script(type='text/ng-template',id='isoScoreModalContent.html')
     button.btn.btn-primary(type="button",ng-click="ok()")
       i.fa.fa-paper-plane-o(aria-hidden="true")
       | &nbsp;Submit
+    button.btn.btn-danger(type="button",ng-click="cancel()")
+      i.fa.fa-undo(aria-hidden="true")
+      | &nbsp;Cancel
+
+script(type='text/ng-template',id='iqModalContent.html')
+  .modal-header
+    h3
+      | View object
+  .modal-body
+    pre.pre-scrollable-large(ng-bind-html="doc | prettify")
+  .modal-footer
+    button.btn.btn-primary(type="button",ng-click="ok()")
+      i.fa.fa-paper-plane-o(aria-hidden="true")
+      | &nbsp;Send IQ Response
     button.btn.btn-danger(type="button",ng-click="cancel()")
       i.fa.fa-undo(aria-hidden="true")
       | &nbsp;Cancel
