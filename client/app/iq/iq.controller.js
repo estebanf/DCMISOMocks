@@ -3,6 +3,8 @@ const angular = require('angular');
 
 /*@ngInject*/
 export function iqController($scope, $http, $uibModalInstance, iq) {
+    $scope.iqResponse = {};
+
     $scope.doc = JSON.stringify(iq).replace(/\,/g,",\n");
     $scope.cancel = function(){
         $uibModalInstance.dismiss('cancel');
@@ -12,7 +14,7 @@ export function iqController($scope, $http, $uibModalInstance, iq) {
         ClientId: iq.clientid,
         CaseId: iq.caseid,
         CreatedBy: "BPM",
-        ActivityType: "IQ Response",
+        ActivityType: $scope.iqResponse.type,
         ActivityCode: String,
         Description: String
       }).then(function(){

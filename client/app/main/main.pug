@@ -264,13 +264,24 @@ script(type='text/ng-template',id='isoScoreModalContent.html')
 script(type='text/ng-template',id='iqModalContent.html')
   .modal-header
     h3
-      | View object
-  .modal-body
-    pre.pre-scrollable-large(ng-bind-html="doc | prettify")
-  .modal-footer
-    button.btn.btn-primary(type="button",ng-click="ok()")
-      i.fa.fa-paper-plane-o(aria-hidden="true")
-      | &nbsp;Send IQ Response
-    button.btn.btn-danger(type="button",ng-click="cancel()")
-      i.fa.fa-undo(aria-hidden="true")
-      | &nbsp;Cancel
+      | Send IQ Response
+  form.form-inline
+    .form-group
+        label.form-space Response Type
+        select.form-control.form-space(required=true,ng-model="iqResponse.type")
+          option(value='-- Select --', selected= true) -- Select --
+          option(value='IQ Incoming Phone Call: IQ Response') IQ Incoming Phone Call: IQ Response
+          option(value='IQ received via mail') IQ received via mail
+          option(value='IQ received via phone') IQ received via phone
+          option(value='IQ received via web') IQ received via web
+          option(value='IQ received via fax') IQ received via fax
+          option(value='IQ Received Via Mail') IQ Received Via Mail
+          option(value='IQ Received via Mail, Missing Information') IQ Received via Mail, Missing Information
+          option(value='IQ Returned Mail') IQ Returned Mail
+    .modal-footer
+      button.btn.btn-primary(type="button",ng-click="ok()")
+        i.fa.fa-paper-plane-o(aria-hidden="true")
+        | &nbsp;Submit
+      button.btn.btn-danger(type="button",ng-click="cancel()")
+        i.fa.fa-undo(aria-hidden="true")
+        | &nbsp;Cancel
