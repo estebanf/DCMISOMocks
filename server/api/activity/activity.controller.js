@@ -73,7 +73,7 @@ export function index(req, res) {
 
 // Gets a single Activity from the DB
 export function show(req, res) {
-  return Activity.findById(req.params.id).exec()
+  return Activity.find({CaseId: req.params.caseId}).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));

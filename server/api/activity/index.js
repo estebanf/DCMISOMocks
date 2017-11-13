@@ -6,7 +6,7 @@ var controller = require('./activity.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/:id', controller.show);
+router.get('/:caseId', controller.show);
 router.post('/:environmentId', controller.create);
 router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
