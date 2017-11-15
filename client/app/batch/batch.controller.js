@@ -43,7 +43,7 @@ export function batchController($scope, $uibModalInstance,uuid) {
       LOB:"Health",
       State:"CO",
       WorkComp:false,
-      CaseStatus:"Investigate",
+      CaseStatus:"Investigation",
       CaseSource:"EDI",
       SkipDuplicateCheck : false
     }
