@@ -44,7 +44,7 @@ export function batchController($scope, $uibModalInstance,uuid) {
       State:"CO",
       WorkComp:false,
       CaseStatus:"Investigate",
-      CaseSource:"Generated",
+      CaseSource:"EDI",
       SkipDuplicateCheck : false
     }
     $scope.batch.Cases.push(addCase);
