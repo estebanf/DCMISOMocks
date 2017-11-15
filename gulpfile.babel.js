@@ -45,6 +45,7 @@ const paths = {
           `!${serverPath}/config/local.env.sample.js`
         ],
         json: [`${serverPath}/**/*.json`],
+        xml: [`${serverPath}/**/*.xml`],
         test: {
           integration: [`${serverPath}/**/*.integration.js`, 'mocha.global.js'],
           unit: [`${serverPath}/**/*.spec.js`, 'mocha.global.js']
@@ -251,6 +252,10 @@ gulp.task('styles', () => {
 gulp.task('transpile:server', () => {
     return gulp.src(_.union(paths.server.scripts, paths.server.json))
         .pipe(transpileServer())
+        .pipe(gulp.dest(`${paths.dist}/${serverPath}`));
+});
+gulp.task('copy:xml', () => {
+    return gulp.src(_.union(paths.server.xml))
         .pipe(gulp.dest(`${paths.dist}/${serverPath}`));
 });
 
@@ -468,6 +473,7 @@ gulp.task('build', cb => {
             'copy:assets',
             'copy:fonts:dist',
             'copy:server',
+            'copy:xml',
             'webpack:dist'
         ],
         'revReplaceWebpack',
