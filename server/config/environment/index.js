@@ -52,6 +52,7 @@ var all = {
     batchCaseQueue: '/queue/BatchCases',
     isoRequestQueue: '/queue/iso_request',
     iqLetterQueue: '/queue/iq_letter',
+    iqBatchQueue: '/queue/iq_batch',
     isoScoreQueue: '/queue/iso_score'
   }
 };

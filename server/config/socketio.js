@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/generateIQBatch/generateIQBatch.socket').register(socket);
   require('../api/IQTracking/IQTracking.socket').register(socket);
   require('../api/diary/diary.socket').register(socket);
   require('../api/activity/activity.socket').register(socket);

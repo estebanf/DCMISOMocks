@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/generateIQBatch', require('./api/generateIQBatch'));
   app.use('/api/iqtracking', require('./api/IQTracking'));
   app.use('/api/isoscore', require('./api/isoscore'));
   app.use('/api/diaries', require('./api/diary'));
