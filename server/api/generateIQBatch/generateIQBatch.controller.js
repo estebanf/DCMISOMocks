@@ -30,6 +30,20 @@ function callBack(requestBody) {
 
   client.on('connected', function () {
 
+    var modifiedCases = [];
+
+    for (var i = 0; i < requestBody.Cases.length; i++) {
+      var batchCase = requestBody.Cases[i];
+      if (batchCase.CaseId) {
+        modifiedCases.push({
+          CaseId : batchCase.CaseId,
+          success : true
+        });
+      }
+    }
+
+    requestBody.Cases = modifiedCases;
+
     client.send({
       'destination': config.stomp.iqBatchQueue,
       'body': JSON.stringify(requestBody),
