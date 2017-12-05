@@ -11,7 +11,7 @@ fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
   content = data;
 });
 
-function callBack(caseId){
+function callBack(caseId, fileType){
   var stomp_args = {
     port: config.stomp.port,
     host: config.stomp.host,
@@ -27,15 +27,29 @@ function callBack(caseId){
 
     var body = content.replace(/00000/g, caseId);
 
-    client.send({
-      'destination': config.stomp.isoRequestQueue,
-      'body': JSON.stringify({
-        "caseId": caseId,
-        "content": body
+    if (fileType == "ISORequest") {
+      client.send({
+        'destination': config.stomp.isoRequestQueue,
+        'body': JSON.stringify({
+          "caseId": caseId,
+          "content": body
 
-      }),
-      'persistent': 'true'
-    });
+        }),
+        'persistent': 'true'
+      });
+    } else if(fileType == "IQLetter") {
+      client.send({
+        'destination': config.stomp.iqLetterQueue,
+        'body': JSON.stringify({
+          "BatchId": 1,
+          "ClientId": 53,
+          "CaseId": caseId,
+          "FileId": "XWMRT2306493"
+        }),
+        'persistent': 'true'
+      });
+    }
+
   });
 }
 
@@ -44,5 +58,5 @@ export function create(req, res) {
 	res.status(200);
 	res.header("Content-Type","application/json");
 	res.send("OK");
-	setTimeout(callBack,3000,req.body.case_id);
+	setTimeout(callBack,3000,req.body.CaseId, req.body.FileType);
 }

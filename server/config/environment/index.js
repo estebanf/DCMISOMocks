@@ -51,6 +51,7 @@ var all = {
     password: process.env.ACTIVEMQ_PASSWORD || 'admin',
     batchCaseQueue: '/queue/BatchCases',
     isoRequestQueue: '/queue/iso_request',
+    iqLetterQueue: '/queue/iq_letter',
     isoScoreQueue: '/queue/iso_score'
   }
 };
