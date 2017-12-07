@@ -34,12 +34,10 @@ function callBack(requestBody) {
 
     for (var i = 0; i < requestBody.Cases.length; i++) {
       var batchCase = requestBody.Cases[i];
-      if (batchCase.CaseId) {
         modifiedCases.push({
           CaseId : batchCase.CaseId,
           success : true
         });
-      }
     }
 
     requestBody.Cases = modifiedCases;
