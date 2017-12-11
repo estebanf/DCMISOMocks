@@ -11,7 +11,7 @@ fs.readFile('server/api/generateFile/ISORequest.xml','utf8',function(err,data){
   content = data;
 });
 
-function callBack(caseId, fileType){
+function callBack(environmentId, reqBody){
   var stomp_args = {
     port: config.stomp.port,
     host: config.stomp.host,
@@ -25,26 +25,42 @@ function callBack(caseId, fileType){
 
   client.on('connected', function() {
 
-    var body = content.replace(/00000/g, caseId);
+    var body = content.replace(/00000/g, reqBody.CaseId);
 
-    if (fileType == "ISORequest") {
+    if (reqBody.FileType == "ISORequest") {
       client.send({
         'destination': config.stomp.isoRequestQueue,
         'body': JSON.stringify({
-          "caseId": caseId,
-          "content": body
+          "ClientId": reqBody.ClientId,
+          "CaseId": reqBody.CaseId,
+          "BatchId":reqBody.BatchId,
+          "EnvironmentId": environmentId,
+          "Content": body
 
         }),
         'persistent': 'true'
       });
-    } else if(fileType == "IQLetter") {
+    } else if(reqBody.FileType == "IQLetter") {
       client.send({
         'destination': config.stomp.iqLetterQueue,
         'body': JSON.stringify({
-          "BatchId": 1,
-          "ClientId": 53,
-          "CaseId": caseId,
+          "BatchId": reqBody.BatchId,
+          "ClientId": reqBody.ClientId,
+          "CaseId": reqBody.CaseId,
+          "EnvironmentId": environmentId,
           "FileId": "XWMRT2306493"
+        }),
+        'persistent': 'true'
+      });
+    } else if(reqBody.FileType == "ISOResponse") {
+      client.send({
+        'destination': config.stomp.isoScoreQueue,
+        'body': JSON.stringify({
+          "BatchId": reqBody.BatchId,
+          "ClientId": reqBody.ClientId,
+          "CaseId": reqBody.CaseId,
+          "EnvironmentId": environmentId,
+          "ISOScore": "HIT"
         }),
         'persistent': 'true'
       });
@@ -54,9 +70,9 @@ function callBack(caseId, fileType){
 }
 
 export function create(req, res) {
-  console.log("Sent a response");
+  console.log("Sent a response " + JSON.stringify(req.params));
 	res.status(200);
 	res.header("Content-Type","application/json");
-	res.send("OK");
-	setTimeout(callBack,3000,req.body.CaseId, req.body.FileType);
+  res.send({result:"ok"});
+	setTimeout(callBack,3000,req.params["EnvironmentId"],req.body);
 }
